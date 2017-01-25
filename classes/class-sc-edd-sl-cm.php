@@ -65,14 +65,65 @@ if (!class_exists('SC_EDD_SL_CM'))
 				$this->add_class_action('admin_init', 'admin_init_handler');
 				$this->add_class_action('admin_menu', 'add_to_admin_menu');
 			}
+			
+			$this->add_class_action('edd_check_license', 'edd_check_license_handler', 8);
 		}
 
-		function add_class_action($tag, $method_name)
+		function add_class_action($tag, $method_name, $priority = 10)
 		{
-
-			return add_action($tag, array($this, $method_name));
+			return add_action($tag, array($this, $method_name), $priority);
 		}
 
+		function edd_check_license_handler($data)
+		{
+			$item_id     = ! empty( $data['item_id'] )   ? absint( $data['item_id'] ) : -1;
+			$item_name   = ! empty( $data['item_name'] ) ? rawurldecode( $data['item_name'] ) : '';
+			$license_key     = urldecode( $data['license'] );
+			$url         = isset( $data['url'] ) ? urldecode( $data['url'] ) : '';
+		//	$license_id  = $this->get_license_by_key( $license_key );
+//			$expires     = $this->get_license_expiration( $license_id );
+//			$payment_id  = get_post_meta( $license_id, '_edd_sl_payment_id', true );
+//			$download_id = get_post_meta( $license_id, '_edd_sl_download_id', true );
+//			$customer_id = edd_get_payment_customer_id( $payment_id );
+
+//			$customer = new EDD_Customer( $customer_id );
+
+			$sl_client = SC_EDD_SL_Client_Entity::get_by_license_key($license_key);
+			
+			if($client == null)
+			{
+				$client = new SC_EDD_SL_CM_Client_Entity();
+			}
+			
+			$client->item_id = $item_id;
+			$client->ip = $_SERVER['REMOTE_ADDR'];
+			$client->url = $url;
+			$client->last_hit_timestamp = time();
+			$client->num_hits++;
+			$client->license_key = $license_key;
+			
+			if($client->first_hit_timestamp == -1)
+			{
+				$client->first_hit_timestamp = time();
+			}
+			
+//			$args = array(
+//				'item_id'   => $item_id,
+//				'item_name' => $item_name,
+//				'key'       => $license_key,
+//				'url'       => $url,
+//			);
+//
+//			$result = $this->check_license( $args );
+//
+//			$license_limit = $this->get_license_limit( $download_id, $license_id );
+//			$site_count    = $this->get_site_count( $license_id );
+//
+//			if( empty( $item_name ) ) {
+//				$item_name = get_the_title( $item_id );
+//			}
+		}
+		
 		function add_class_filter($tag, $method_name)
 		{
 
@@ -220,7 +271,22 @@ if (!class_exists('SC_EDD_SL_CM'))
 			//Apply Styles
 			add_action('admin_print_styles-' . $tools_page_hook_suffix, array($this, 'enqueue_styles'));
 			add_action('admin_print_styles-' . $settings_page_hook_suffix, array($this, 'enqueue_styles'));
+			
+			$this->add_class_action("load-$tools_page_hook_suffix", 'add_clients_screen_options');
 		}
+		
+		public function add_clients_screen_options()
+        {
+            $option = 'per_page';
+
+            $args = array(
+                'label' => SC_EDD_SL_CM_U::__('SL Clients'),
+                'default' => 10,
+                'option' => 'sc_edd_sl_clients_per_page'
+            );
+
+            add_screen_option($option, $args);
+        }
 
 		// </editor-fold>
 

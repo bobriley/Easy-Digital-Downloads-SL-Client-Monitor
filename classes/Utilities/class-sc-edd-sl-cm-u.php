@@ -104,7 +104,7 @@ if (!class_exists('SC_EDD_U'))
         {
             $local_ticks = self::get_local_ticks_from_gmt_formatted_time($timestamp);
             //F j, hh:MM meridian
-            //return EZP_IBC_U::get_wp_formatted_from_gmt_formatted_time($item['timestamp']);
+            //return SC_EDD_SL_CM_U::get_wp_formatted_from_gmt_formatted_time($item['timestamp']);
 
             $date_portion = date('F j, Y', $local_ticks);
             

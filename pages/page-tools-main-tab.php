@@ -66,8 +66,8 @@ if (isset($_REQUEST['s']))
      }
  } 
 
-$subscriber_list_control = new EZP_CSPE_Subscriber_List_Control($search, $nonce_action);
-$subscriber_list_control->prepare_items();
+$client_list_control = new SC_EDD_SL_CM_Client_List_Control($search, $nonce_action);
+$client_list_control->prepare_items();
     
 ?>
 

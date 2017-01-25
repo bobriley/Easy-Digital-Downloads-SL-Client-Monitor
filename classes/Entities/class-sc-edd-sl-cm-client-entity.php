@@ -24,17 +24,17 @@
 require_once(dirname(__FILE__) .  '/class-sc-edd-sl-cm-standard-entity-base.php');
 
 //rsr todo: rename this entity
-if (!class_exists('SC_EDD_Client_Entity')) {
+if (!class_exists('SC_EDD_SL_CM_Client_Entity')) {
 
     /**     
      * @author Bob Riley <support@snapcreek.com>
      * @copyright 2015 Snap Creek LLC
      */
-    class SC_EDD_Client_Entity extends SC_EDD_Standard_Entity_Base {
+    class SC_EDD_SL_CM_Client_Entity extends SC_EDD_Standard_Entity_Base {
  
         public $item_id = -1;   
-		public $source_ip = '0.0.0.0';
-        public $source_site = '';
+		public $ip = '0.0.0.0';
+        public $url = '';
 		public $first_hit_timestamp = -1;
 		public $last_hit_timestamp = -1;
 		public $num_hits = 0;
