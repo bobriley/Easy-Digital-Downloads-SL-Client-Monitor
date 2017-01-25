@@ -214,23 +214,6 @@ if (!class_exists('SC_EDD_SL_CM_U'))
 
             return $modified_url;
         }
-
-        public static function echo_footer_links()
-        {
-
-            $faq_text = __('FAQ');
-            $contact_text = __('Contact');
-
-            $coming_soon_pro_url = menu_page_url(SC_EDD_SL_CM_Constants::$COMING_SOON_PRO_SUBMENU_SLUG, false);
-
-            $after_launch_text = __('After Launch');
-            $after_launch_url = menu_page_url(SC_EDD_SL_CM_Constants::$SUBSCRIBERS_SUBMENU_SLUG, false);
-            $after_launch_url = self::append_query_value($after_launch_url, 'tab', 'leadwatch');
-
-            echo "<a href='https://snapcreek.com/ezp-coming-soon/docs/faqs/' target='_blank'>$faq_text</a> | ";
-            echo "<a href='https://snapcreek.com/support/' target='_blank'>$contact_text</a> | ";
-        }
-
     }
 
     SC_EDD_SL_CM_U::init();

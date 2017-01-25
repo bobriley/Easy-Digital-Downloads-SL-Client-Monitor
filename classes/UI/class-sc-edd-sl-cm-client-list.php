@@ -200,13 +200,19 @@ if (!class_exists('SC_EDD_SL_CM_Client_List_Control'))
 				// RSR TODO: Where does this cb come fropm?
                 'cb' => '<input type="checkbox" />',
                 //   'id' => SC_EDD_SL_CM_U::__('ID'),                
-                'item_id' => SC_EDD_SL_CM_U::__('Item ID'),
+                //'item_id' => SC_EDD_SL_CM_U::__('Item ID'),
+				'item_id' => SC_EDD_SL_CM_U::__('Item'),
 				'url' => SC_EDD_SL_CM_U::__('URL'),
 				'ip' => SC_EDD_SL_CM_U::__('IP'),
-				'first_hit_timestamp' => SC_EDD_SL_CM_U::__('Initial Hit Time'),
-				'last_hit_timestamp' => SC_EDD_SL_CM_U::__('Last Hit Time'),
-                'num_hits' => SC_EDD_SL_CM_U::__('# Hits'),
+				'first_hit_timestamp' => SC_EDD_SL_CM_U::__('Initial Hit'),
+				'last_hit_timestamp' => SC_EDD_SL_CM_U::__('Latest Hit'),
+                'num_hits' => SC_EDD_SL_CM_U::__('Hits'),
+				'hits_per_day' => SC_EDD_SL_CM_U::__('Hits/Day'),
+				'activations' => SC_EDD_SL_CM_U::__('Activations'),
+				'is_blocked' => SC_EDD_SL_CM_U::__('Is Blocked'),
                 'license_key' => SC_EDD_SL_CM_U::__('License Key'),
+				'license_key' => SC_EDD_SL_CM_U::__('Expiration'),
+				'customer_id' => SC_EDD_SL_CM_U::__('Customer'),
             );
 
             return $columns;

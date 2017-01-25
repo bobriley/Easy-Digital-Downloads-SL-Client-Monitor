@@ -261,7 +261,7 @@ if (!class_exists('SC_EDD_SL_CM'))
 
 			$perms = 'manage_options';
 
-			add_menu_page('Easy Digital Downloads SL Client Monitor', 'SL Clients', $perms, SC_EDD_SL_CM_Constants::PLUGIN_SLUG, array($this, 'display_tools_page'), SC_EDD_SL_CM_U::$PLUGIN_URL . '/images/sc-edd-sl-cm-menu-icon.png');
+			add_menu_page('Easy Digital Downloads SL Client Monitor', 'SL Clients', $perms, SC_EDD_SL_CM_Constants::PLUGIN_SLUG, array($this, 'display_tools_page'), SC_EDD_SL_CM_U::$PLUGIN_URL . '/images/74-location-lighter.png');
 			$tools_page_hook_suffix = add_submenu_page(SC_EDD_SL_CM_Constants::PLUGIN_SLUG, $this->__('Easy Digital Downloads SL Client Monitor Tools'), $this->__('Tools'), $perms, SC_EDD_SL_CM_Constants::$TOOLS_SUBMENU_SLUG, array($this, 'display_tools_page'));
 			$settings_page_hook_suffix = add_submenu_page(SC_EDD_SL_CM_Constants::PLUGIN_SLUG, $this->__('Easy Digital Downloads SL Client Monitor Settings'), $this->__('Settings'), $perms, SC_EDD_SL_CM_Constants::$SETTINGS_SUBMENU_SLUG, array($this, 'display_settings_page'));
 
