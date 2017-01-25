@@ -42,7 +42,7 @@ if (!class_exists('SC_EDD_SL_CM_Client_Entity')) {
         
         const NUMBER_PER_PAGE = 10;
         
-        public static $TABLE_NAME = "sc_edd_clients";
+        public static $TABLE_NAME = "sc_edd_sl_clients";
         
         function __construct() {
             

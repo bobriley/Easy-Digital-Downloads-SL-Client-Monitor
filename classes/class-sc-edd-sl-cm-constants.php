@@ -20,14 +20,14 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-if (!class_exists('SC_EDD_Constants'))
+if (!class_exists('SC_EDD_SL_CM_Constants'))
 {
 
 	/**
 	 * @author Bob Riley <support@snapcreek.com>
 	 * @copyright 2015 Snap Creek LLC
 	 */
-	class SC_EDD_Constants
+	class SC_EDD_SL_CM_Constants
 	{
 		const PLUGIN_SLUG = 'sc-edd-sl-cm';
 		const PLUGIN_VERSION = "0.0.1"; // RSR Version
@@ -45,12 +45,12 @@ if (!class_exists('SC_EDD_Constants'))
 
 			self::$PLUGIN_DIR = $__dir__ . "../" . self::PLUGIN_SLUG;
 
-			self::$TOOLS_SUBMENU_SLUG = SC_EDD_Constants::PLUGIN_SLUG;
-			self::$SETTINGS_SUBMENU_SLUG = SC_EDD_Constants::PLUGIN_SLUG . '-settings';
+			self::$TOOLS_SUBMENU_SLUG = SC_EDD_SL_CM_Constants::PLUGIN_SLUG;
+			self::$SETTINGS_SUBMENU_SLUG = SC_EDD_SL_CM_Constants::PLUGIN_SLUG . '-settings';
 		}
 
 	}
 
-	SC_EDD_Constants::init();
+	SC_EDD_SL_CM_Constants::init();
 }
 ?>

@@ -25,8 +25,7 @@ if (!class_exists('WP_List_Table'))
     require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
 }
 
-require_once(SC_EDD_SL_CM_U::$PLUGIN_DIRECTORY . '/classes/Utilities/class-ezp-ibc-u.php');
-require_once(SC_EDD_SL_CM_U::$PLUGIN_DIRECTORY . '/classes/class-ezp-ibc-report-helper.php');
+require_once(SC_EDD_SL_CM_U::$PLUGIN_DIRECTORY . '/classes/Utilities/class-sc-edd-sl-cm-u.php');
 
 if (!class_exists('SC_EDD_SL_CM_Client_List_Control'))
 {
@@ -221,7 +220,8 @@ if (!class_exists('SC_EDD_SL_CM_Client_List_Control'))
         public function get_sortable_columns()
         {
             return array('num_hits' => array('num_hits', false),
-                'last_hit_timestamp' => array('last_hit_timestamp', false));
+                'last_hit_timestamp' => array('last_hit_timestamp', false),
+				'first_hit_timestamp' => array('first_hit_timestamp', false));
         }
 
         public function get_bulk_actions()

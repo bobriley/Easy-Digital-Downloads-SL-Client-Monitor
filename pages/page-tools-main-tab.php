@@ -1,19 +1,19 @@
 <?php
+require_once(SC_EDD_SL_CM_U::$PLUGIN_DIRECTORY . '/classes/UI/class-sc-edd-sl-cm-client-list.php');
 
-require_once(SC_EDD_U::$PLUGIN_DIRECTORY . '/classes/Utilities/class-sc-edd-sl-cm-import-utility.php');
 $export_nonce = wp_create_nonce('easy-pie-cspe-export-subscribers');
 ?>
 
 <div class="wrap">
 
-	<?php screen_icon(SC_EDD_Constants::PLUGIN_SLUG); ?>
+	<?php screen_icon(SC_EDD_SL_CM_Constants::PLUGIN_SLUG); ?>
 	<?php
 	if (isset($_GET['settings-updated']))
 	{
-		echo "<div class='updated'><p>" . SC_EDD_U::__('If you have a caching plugin, be sure to clear the cache!') . "</p></div>";
+		echo "<div class='updated'><p>" . SC_EDD_SL_CM_U::__('If you have a caching plugin, be sure to clear the cache!') . "</p></div>";
 	}
 	?>
-    <div id="easypie-cs-options" class="inside">
+    <div id="sc-edd-sl-cm-options" class="inside">
 <?php
 /*
   Coming Soon & Maintenance Elite Plugin
@@ -35,9 +35,6 @@ $export_nonce = wp_create_nonce('easy-pie-cspe-export-subscribers');
   (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-?>
-<?php
-require_once(EZP_CSPE_U::$PLUGIN_DIRECTORY . '/classes/UI/class-ezp-cspe-subscriber-list.php');
 
 $nonce_action = 'easy-pie-cspe-export-subscribers';
 $nonce = wp_create_nonce($nonce_action);
@@ -50,7 +47,7 @@ if(isset($_REQUEST['action']))
     {
         $subscriber_id = $_REQUEST['subscriber_id'];
         
-        EZP_CSPE_Subscriber_Entity::delete_by_id($subscriber_id);
+        SC_EDD_SL_CM_Subscriber_Entity::delete_by_id($subscriber_id);
     }
 }
 
@@ -69,6 +66,7 @@ if (isset($_REQUEST['s']))
 $client_list_control = new SC_EDD_SL_CM_Client_List_Control($search, $nonce_action);
 $client_list_control->prepare_items();
     
+$global = SC_EDD_SL_CM_Global_Entity::get_instance();
 ?>
 
 <style lang="text/css">
@@ -79,38 +77,26 @@ $client_list_control->prepare_items();
 
 <div class="wrap">
 
-    <?php screen_icon(EZP_CSPE_Constants::PLUGIN_SLUG); ?>
-    <h2><?php EZP_CSPE_U::_e('Subscriber Management'); ?></h2>
-    <?php
-    $global = EZP_CSPE_Global_Entity::get_instance();
+    <?php screen_icon(SC_EDD_SL_CM_Constants::PLUGIN_SLUG); ?>
+    <h2><?php SC_EDD_SL_CM_U::_e('EDD SL Clients'); ?></h2>
 
-    $config = EZP_CSPE_Config_Entity::get_by_id($global->config_index);
+    <div id="sc-edd-sl-cm-options" class="inside">
 
-//    EZP_CSPE_U::display_coming_soon_admin_notice($config->coming_soon_mode_on);
-    ?>
-
-    <div id="easypie-cs-options" class="inside">
-        <?php
-        $global = EZP_CSPE_Global_Entity::get_instance();
-
-        $config = EZP_CSPE_Config_Entity::get_by_id($global->config_index);
-        ?>
-
-        <script type="text/javascript" src='<?php echo EZP_CSPE_U::$PLUGIN_URL . "/js/page-subscribers.js?" . EZP_CSPE_Constants::PLUGIN_VERSION; ?>'></script>
+<!--        <script type="text/javascript" src='<?php echo SC_EDD_SL_CM_U::$PLUGIN_URL . "/js/page-subscribers.js?" . SC_EDD_SL_CM_Constants::PLUGIN_VERSION; ?>'></script>-->
 
         <style lang="text/css">
             .compound-setting { line-height:20px;}
             .narrow-input { width:66px;}
             .long-input { width: 345px;}
 
-            #easypie-cs-subscriber-table {font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+            #sc-edd-sl-cm-client-table {font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
                                           font-size: 12px;
                                           background: #fff;
                                           width: 100%;
                                           border-collapse: collapse;
                                           text-align: left;
                                           margin: 20px;}
-            #easypie-cs-subscriber-table th  {
+            #sc-edd-sl-cm-client-table th  {
                 font-weight:bold;
                 text-decoration: underline;
                 padding-bottom: 4px;        
@@ -120,7 +106,7 @@ $client_list_control->prepare_items();
 
             }
 
-            #easypie-cs-subscriber-table td  {        
+            #sc-edd-sl-cm-client-table td  {        
                 border-bottom: 1px solid #ccc;
                 color: #669;
                 padding-bottom: 4px;        
@@ -133,7 +119,7 @@ $client_list_control->prepare_items();
 
             }    
 
-            #easypie-cs-subscriber-table button  {
+            #sc-edd-sl-cm-client-table button  {
                 float:right;
                 /*padding: 6px 8px;*/
             }    
@@ -151,12 +137,10 @@ $client_list_control->prepare_items();
         </style>
 
         <div class="wrap">             
-            <div id="easypie-cs-options" class="inside">
-            <?php $subscriber_list_control->display(); ?>            
+            <div id="sc-edd-sl-cm-options" class="inside">
+            <?php $client_list_control->display(); ?>            
             </div>                                    
         </div>
-<!--        <button style="margin:0px;" id="btn-export" type="button button-secondary" onclick="location.href = ajaxurl + '?action=EZP_CSPE_export_all_subscribers&_wpnonce=<?php echo $nonce; ?>';
-                        return false;"><?php EZP_CSPE_U::_e('CSV Export'); ?></button>-->
     </div>
 
 

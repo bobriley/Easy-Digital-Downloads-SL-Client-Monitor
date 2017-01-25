@@ -22,14 +22,14 @@
 
 require_once(dirname(__FILE__) . '/../class-sc-edd-sl-cm-constants.php');
 
-if (!class_exists('SC_EDD_U'))
+if (!class_exists('SC_EDD_SL_CM_U'))
 {
 
     /**
      * @author Bob Riley <support@snapcreek.com>
      * @copyright 2015 Snap Creek LLC
      */
-    class SC_EDD_U
+    class SC_EDD_SL_CM_U
     {
         // Pseudo-constants
         public static $MINI_THEMES_TEMPLATE_DIRECTORY;
@@ -44,9 +44,9 @@ if (!class_exists('SC_EDD_U'))
 
             self::$MINI_THEMES_TEMPLATE_DIRECTORY = $__dir__ . "/../templates/";
 
-            self::$PLUGIN_URL = plugins_url() . "/" . SC_EDD_Constants::PLUGIN_SLUG;
+            self::$PLUGIN_URL = plugins_url() . "/" . SC_EDD_SL_CM_Constants::PLUGIN_SLUG;
 
-            self::$PLUGIN_DIRECTORY = (WP_CONTENT_DIR . "/plugins/" . SC_EDD_Constants::PLUGIN_SLUG);
+            self::$PLUGIN_DIRECTORY = (WP_CONTENT_DIR . "/plugins/" . SC_EDD_SL_CM_Constants::PLUGIN_SLUG);
 
             self::$type_format_array = array('boolean' => '%s', 'integer' => '%d', 'double' => '%g', 'string' => '%s');
         }
@@ -64,13 +64,13 @@ if (!class_exists('SC_EDD_U'))
         public static function _e($text)
         {
 
-            _e($text, SC_EDD_Constants::PLUGIN_SLUG);
+            _e($text, SC_EDD_SL_CM_Constants::PLUGIN_SLUG);
         }
 
         public static function __($text)
         {
 
-            return __($text, SC_EDD_Constants::PLUGIN_SLUG);
+            return __($text, SC_EDD_SL_CM_Constants::PLUGIN_SLUG);
         }
 
         public static function _he($text)
@@ -170,12 +170,12 @@ if (!class_exists('SC_EDD_U'))
 //            if ($coming_soon_on)
 //            {
 //
-//                echo "<div class='error'><a href='" . admin_url() . "admin.php?page=" . SC_EDD_Constants::$SETTINGS_SUBMENU_SLUG . "'>" . self::__("Coming Soon is On") . "</a></div>";
+//                echo "<div class='error'><a href='" . admin_url() . "admin.php?page=" . SC_EDD_SL_CM_Constants::$SETTINGS_SUBMENU_SLUG . "'>" . self::__("Coming Soon is On") . "</a></div>";
 //            }
 //            else
 //            {
 //
-//                echo "<div style='text-decoration:underline' class='updated'><a href='" . admin_url() . "admin.php?page=" . SC_EDD_Constants::$SETTINGS_SUBMENU_SLUG . "'>" . self::__("Coming Soon is Off") . "</a></div>";
+//                echo "<div style='text-decoration:underline' class='updated'><a href='" . admin_url() . "admin.php?page=" . SC_EDD_SL_CM_Constants::$SETTINGS_SUBMENU_SLUG . "'>" . self::__("Coming Soon is Off") . "</a></div>";
 //            }
 //        }
 		
@@ -184,12 +184,12 @@ if (!class_exists('SC_EDD_U'))
 //            if ($coming_soon_on)
 //            {
 //
-//                echo "<div class='error'><a href='" . admin_url() . "admin.php?page=" . SC_EDD_Constants::$SETTINGS_SUBMENU_SLUG . "'>" . self::__("Coming Soon is On") . "</a></div>";
+//                echo "<div class='error'><a href='" . admin_url() . "admin.php?page=" . SC_EDD_SL_CM_Constants::$SETTINGS_SUBMENU_SLUG . "'>" . self::__("Coming Soon is On") . "</a></div>";
 //            }
 //            else
 //            {
 //
-//                echo "<div style='text-decoration:underline' class='updated'><a href='" . admin_url() . "admin.php?page=" . SC_EDD_Constants::$SETTINGS_SUBMENU_SLUG . "'>" . self::__("Coming Soon is Off") . "</a></div>";
+//                echo "<div style='text-decoration:underline' class='updated'><a href='" . admin_url() . "admin.php?page=" . SC_EDD_SL_CM_Constants::$SETTINGS_SUBMENU_SLUG . "'>" . self::__("Coming Soon is Off") . "</a></div>";
 //            }
 //        }
         
@@ -370,11 +370,11 @@ if (!class_exists('SC_EDD_U'))
             {
                 if (is_array($message) || is_object($message))
                 {
-                    error_log(SC_EDD_Constants::PLUGIN_SLUG . ":" . print_r($message, true));
+                    error_log(SC_EDD_SL_CM_Constants::PLUGIN_SLUG . ":" . print_r($message, true));
                 }
                 else
                 {
-                    error_log(SC_EDD_Constants::PLUGIN_SLUG . ":" . $message);
+                    error_log(SC_EDD_SL_CM_Constants::PLUGIN_SLUG . ":" . $message);
                 }
             }
         }
@@ -389,7 +389,7 @@ if (!class_exists('SC_EDD_U'))
         public static function debug_dump($message, $object)
         {
 
-            SC_EDD_U::log($message . ":" . var_export($object, true));
+            SC_EDD_SL_CM_U::log($message . ":" . var_export($object, true));
         }
 
         public static function is_current_url_unfiltered($config)
@@ -416,7 +416,6 @@ if (!class_exists('SC_EDD_U'))
 		
 		public static function is_current_ip_allowed($config)
         {
-			/* @var $config SC_EDD_Config_Entity */
             $remote_addr = strtolower($_SERVER['REMOTE_ADDR']);
 
             $allowed_ips = preg_split('/\r\n|[\r\n]/', $config->allowed_ips);
@@ -450,10 +449,10 @@ if (!class_exists('SC_EDD_U'))
             $faq_text = __('FAQ');
             $contact_text = __('Contact');
 
-            $coming_soon_pro_url = menu_page_url(SC_EDD_Constants::$COMING_SOON_PRO_SUBMENU_SLUG, false);
+            $coming_soon_pro_url = menu_page_url(SC_EDD_SL_CM_Constants::$COMING_SOON_PRO_SUBMENU_SLUG, false);
 
             $after_launch_text = __('After Launch');
-            $after_launch_url = menu_page_url(SC_EDD_Constants::$SUBSCRIBERS_SUBMENU_SLUG, false);
+            $after_launch_url = menu_page_url(SC_EDD_SL_CM_Constants::$SUBSCRIBERS_SUBMENU_SLUG, false);
             $after_launch_url = self::append_query_value($after_launch_url, 'tab', 'leadwatch');
 
             echo "<a href='https://snapcreek.com/ezp-coming-soon/docs/faqs/' target='_blank'>$faq_text</a> | ";
@@ -462,6 +461,6 @@ if (!class_exists('SC_EDD_U'))
 
     }
 
-    SC_EDD_U::init();
+    SC_EDD_SL_CM_U::init();
 }
 ?>

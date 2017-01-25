@@ -21,16 +21,16 @@
  */
 require_once('class-sc-edd-sl-cm-json-entity-base.php');
 
-if (!class_exists('SC_EDD_Global_Entity'))
+if (!class_exists('SC_EDD_SL_CM_Global_Entity'))
 {
 
 	/**
 	 * @author Bob Riley <support@snapcreek.com>
 	 * @copyright 2015 Snap Creek LLC
 	 */
-	class SC_EDD_Global_Entity extends SC_EDD_JSON_Entity_Base
+	class SC_EDD_SL_CM_Global_Entity extends SC_EDD_JSON_Entity_Base
 	{
-		const TYPE = "SC_EDD_Global_Entity";
+		const TYPE = "SC_EDD_SL_CM_Global_Entity";
 
 		public $collection_enabled = false;
 
@@ -46,7 +46,7 @@ if (!class_exists('SC_EDD_Global_Entity'))
 
 			if ($globals == null)
 			{
-				$global = new SC_EDD_Global_Entity();
+				$global = new SC_EDD_SL_CM_Global_Entity();
 
 				$global->save();
 			}

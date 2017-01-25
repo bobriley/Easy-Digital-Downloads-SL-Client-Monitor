@@ -70,7 +70,7 @@ if (!class_exists('SC_EDD_Standard_Entity_Base')) {
                     }
                 }
                 else {
-                    //SC_EDD_Utility::debug("$table_name table not present so didn't strip indices");
+                    //SC_EDD_SL_CM_Utility::debug("$table_name table not present so didn't strip indices");
                 }
             }
             $character_set_string = '';
@@ -119,14 +119,14 @@ if (!class_exists('SC_EDD_Standard_Entity_Base')) {
 
             $query_string = "INSERT INTO $this->table_name (";
 
-            $properties = SC_EDD_U::get_public_properties($this);
+            $properties = SC_EDD_SL_CM_U::get_public_properties($this);
 
             $keys = array_keys($properties);
             $query_string .= implode(',', $keys);
             $query_string .= ') VALUES (';
 
             foreach ($properties as $property_value) {
-                $query_string .= SC_EDD_U::get_db_type_format($property_value) . ",";
+                $query_string .= SC_EDD_SL_CM_U::get_db_type_format($property_value) . ",";
             }
 
             if (count($properties) > 0) {
@@ -147,7 +147,7 @@ if (!class_exists('SC_EDD_Standard_Entity_Base')) {
                 $this->id = -1;
 
                 $wpdb->print_error();
-                SC_EDD_U::log("Error inserting. Query: " . $prepared_query);
+                SC_EDD_SL_CM_U::log("Error inserting. Query: " . $prepared_query);
                 
                 return false;
             } else {
@@ -163,10 +163,10 @@ if (!class_exists('SC_EDD_Standard_Entity_Base')) {
 
             $query_string .= " SET ";
 
-            $properties = SC_EDD_U::get_public_properties($this);
+            $properties = SC_EDD_SL_CM_U::get_public_properties($this);
 
             foreach ($properties as $prop_name => $prop_value) {
-                $type_format = SC_EDD_U::get_db_type_format($prop_value);
+                $type_format = SC_EDD_SL_CM_U::get_db_type_format($prop_value);
 
                 $query_string .= "$prop_name = $type_format,";
             }
@@ -238,7 +238,7 @@ if (!class_exists('SC_EDD_Standard_Entity_Base')) {
             if ($row != NULL) {
                 return self::get_instance_from_row($row, $class_name, $table_name);
             } else {
-                SC_EDD_U::log("get_by_unique_field_and_type: row is null for $table_name, $field_name, $field_value");
+                SC_EDD_SL_CM_U::log("get_by_unique_field_and_type: row is null for $table_name, $field_name, $field_value");
                 return null;
             }
         }
@@ -347,7 +347,7 @@ if (!class_exists('SC_EDD_Standard_Entity_Base')) {
             $instance->id = $row->id;
             $instance->table_name = $table_name;
 
-            $properties = SC_EDD_U::get_public_class_properties($class_name);
+            $properties = SC_EDD_SL_CM_U::get_public_class_properties($class_name);
 
             foreach ($properties as $prop_name => $prop_value) {
 

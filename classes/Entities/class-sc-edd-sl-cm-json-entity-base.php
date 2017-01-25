@@ -78,7 +78,7 @@ if (!class_exists('SC_EDD_JSON_Entity_Base'))
 			$query_string = "INSERT INTO " . $this->table_name;
 			$query_string .= " (type, data) VALUES (%s, %s);";
 
-			$data = SC_EDD_U::get_public_properties($this);
+			$data = SC_EDD_SL_CM_U::get_public_properties($this);
 
 			$serialized_data = json_encode($data);
 
@@ -96,7 +96,7 @@ if (!class_exists('SC_EDD_JSON_Entity_Base'))
 
 					$this->id = -1;
 
-					SC_EDD_U::log("Error inserting. Query: " . $prepared_query);
+					SC_EDD_SL_CM_U::log("Error inserting. Query: " . $prepared_query);
 
 					return false;
 				}
@@ -104,7 +104,7 @@ if (!class_exists('SC_EDD_JSON_Entity_Base'))
 			else
 			{
 
-				SC_EDD_U::log("Entity trying to be inserted exceeds max size of 65K!");
+				SC_EDD_SL_CM_U::log("Entity trying to be inserted exceeds max size of 65K!");
 				return false;
 			}
 
@@ -118,7 +118,7 @@ if (!class_exists('SC_EDD_JSON_Entity_Base'))
 			$query_string = "UPDATE " . $this->table_name;
 			$query_string .= " SET type = %s, data = %s WHERE id = %d;";
 
-			$data = SC_EDD_U::get_public_properties($this);
+			$data = SC_EDD_SL_CM_U::get_public_properties($this);
 
 			$serialized_data = json_encode($data);
 
@@ -133,7 +133,7 @@ if (!class_exists('SC_EDD_JSON_Entity_Base'))
 			else
 			{
 
-				SC_EDD_U::log("Entity trying to be updated exceeds max size of 65K!");
+				SC_EDD_SL_CM_U::log("Entity trying to be updated exceeds max size of 65K!");
 				return false;
 			}
 		}
@@ -185,7 +185,7 @@ if (!class_exists('SC_EDD_JSON_Entity_Base'))
 			}
 			else
 			{
-				SC_EDD_U::log("get_by_id_and_type: row is null for $prepped");
+				SC_EDD_SL_CM_U::log("get_by_id_and_type: row is null for $prepped");
 				return null;
 			}
 		}
