@@ -2,7 +2,7 @@
 
 /*
   Easy Digital Downloads Software Licensing Client Monitor Plugin
-  Copyright (C) 2016, Snap Creek LLC
+  Copyright (C) 2017, Snap Creek LLC
   website: snapcreek.com contact: support@snapcreek.com
  
   Easy Digital Downloads Software Licensing Client Monitor Plugin is distributed under the GNU General Public License, Version 3,
@@ -24,8 +24,8 @@
 if (!class_exists('SC_EDD_SL_CM_Plugin_Base')) {
     
     /**     
-     * @author Bob Riley <support@snapcreek.com>
-     * @copyright 2015 Snap Creek LLC
+     * @author Snap Creek Software <support@snapcreek.com>
+     * @copyright 2017 Snap Creek LLC
      */
     class SC_EDD_SL_CM_Plugin_Base {
 

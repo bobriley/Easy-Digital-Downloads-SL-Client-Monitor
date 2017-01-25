@@ -17,7 +17,7 @@ $export_nonce = wp_create_nonce('easy-pie-cspe-export-subscribers');
 <?php
 /*
   Coming Soon & Maintenance Elite Plugin
-  Copyright (C) 2016, Snap Creek LLC
+  Copyright (C) 2017, Snap Creek LLC
   website: snapcreek.com contact: support@snapcreek.com
 
   Coming Soon & Maintenance Elite Plugin is distributed under the GNU General Public License, Version 3,

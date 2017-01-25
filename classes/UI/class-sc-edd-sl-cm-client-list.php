@@ -31,7 +31,7 @@ if (!class_exists('SC_EDD_SL_CM_Client_List_Control'))
 {
 
     /**
-     * @author Bob Riley <bob@easypiewp.com>
+     * @author Snap Creek Software <bob@easypiewp.com>
      * @copyright 2014 Synthetic Thought LLC
      */
     class SC_EDD_SL_CM_Client_List_Control extends WP_List_Table
@@ -198,7 +198,7 @@ if (!class_exists('SC_EDD_SL_CM_Client_List_Control'))
         {
             $columns = array(
 				// RSR TODO: Where does this cb come fropm?
-               // 'cb' => '<input type="checkbox" />',
+                'cb' => '<input type="checkbox" />',
                 //   'id' => SC_EDD_SL_CM_U::__('ID'),                
                 'item_id' => SC_EDD_SL_CM_U::__('Item ID'),
 				'url' => SC_EDD_SL_CM_U::__('URL'),

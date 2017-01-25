@@ -1,7 +1,7 @@
 <?php
 /*
   Easy Digital Downloads Software Licensing Client Monitor Plugin
-  Copyright (C) 2016, Snap Creek LLC
+  Copyright (C) 2017, Snap Creek LLC
   website: snapcreek.com contact: support@snapcreek.com
 
   Easy Digital Downloads Software Licensing Client Monitor Plugin is distributed under the GNU General Public License, Version 3,
@@ -24,10 +24,9 @@ require_once(dirname(__FILE__) . '/../class-sc-edd-sl-cm-constants.php');
 
 if (!class_exists('SC_EDD_SL_CM_U'))
 {
-
     /**
-     * @author Bob Riley <support@snapcreek.com>
-     * @copyright 2015 Snap Creek LLC
+     * @author Snap Creek Software <support@snapcreek.com>
+     * @copyright 2017 Snap Creek LLC
      */
     class SC_EDD_SL_CM_U
     {
@@ -90,36 +89,7 @@ if (!class_exists('SC_EDD_SL_CM_U'))
                 return 'false';
             }
         }
-
-        public static function get_local_ticks_from_gmt_formatted_time($timestamp)
-        {
-            $ticks = strtotime($timestamp);
-
-            $ticks += ((int) get_option('gmt_offset') * 3600);
-
-            return $ticks;
-        }
-
-        public static function get_simplified_local_time_from_formatted_gmt($timestamp, $date_only = false)
-        {
-            $local_ticks = self::get_local_ticks_from_gmt_formatted_time($timestamp);
-            //F j, hh:MM meridian
-            //return SC_EDD_SL_CM_U::get_wp_formatted_from_gmt_formatted_time($item['timestamp']);
-
-            $date_portion = date('F j, Y', $local_ticks);
-            
-            if($date_only == false)
-            {
-                $time_portion = ' ' . date('g:i:s a', $local_ticks);
-            }
-            else
-            {
-                $time_portion = '';
-            }
-
-            return "$date_portion$time_portion";
-        }
-
+     
         public static function get_db_type_format($variable)
         {
 
@@ -154,46 +124,7 @@ if (!class_exists('SC_EDD_SL_CM_U'))
             return $publics;
         }
 
-        public static function get_guid()
-        {
-
-            if (function_exists('com_create_guid') === true)
-            {
-                return trim(com_create_guid(), '{}');
-            }
-
-            return sprintf('%04X%04X-%04X-%04X-%04X-%04X%04X%04X', mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(16384, 20479), mt_rand(32768, 49151), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535));
-        }
-
-//        public static function display_coming_soon_admin_notice($coming_soon_on)
-//        {
-//            if ($coming_soon_on)
-//            {
-//
-//                echo "<div class='error'><a href='" . admin_url() . "admin.php?page=" . SC_EDD_SL_CM_Constants::$SETTINGS_SUBMENU_SLUG . "'>" . self::__("Coming Soon is On") . "</a></div>";
-//            }
-//            else
-//            {
-//
-//                echo "<div style='text-decoration:underline' class='updated'><a href='" . admin_url() . "admin.php?page=" . SC_EDD_SL_CM_Constants::$SETTINGS_SUBMENU_SLUG . "'>" . self::__("Coming Soon is Off") . "</a></div>";
-//            }
-//        }
-		
-//		 public static function display_coming_soon_admin_bar_alert($coming_soon_on)
-//        {
-//            if ($coming_soon_on)
-//            {
-//
-//                echo "<div class='error'><a href='" . admin_url() . "admin.php?page=" . SC_EDD_SL_CM_Constants::$SETTINGS_SUBMENU_SLUG . "'>" . self::__("Coming Soon is On") . "</a></div>";
-//            }
-//            else
-//            {
-//
-//                echo "<div style='text-decoration:underline' class='updated'><a href='" . admin_url() . "admin.php?page=" . SC_EDD_SL_CM_Constants::$SETTINGS_SUBMENU_SLUG . "'>" . self::__("Coming Soon is Off") . "</a></div>";
-//            }
-//        }
-        
-        
+       
         public static function echo_checked($val)
         {
             echo $val ? 'checked' : '';
@@ -236,124 +167,7 @@ if (!class_exists('SC_EDD_SL_CM_U'))
             }
 
             echo "<option value='$value' $selected>$text</option>";
-        }
-
-        public static function get_manifest_by_key($key)
-        {
-
-            $manifests = self::get_manifests();
-
-            foreach ($manifests as $manifest)
-            {
-
-                if ($manifest->key == $key)
-                {
-
-                    return $manifest;
-                }
-            }
-
-            return null;
-        }
-
-        public static function get_manifests()
-        {
-
-            $user_manifest_array = self::get_manifests_in_directory(self::$MINI_THEMES_USER_DIRECTORY, self::$MINI_THEMES_USER_URL);
-            $standard_manifest_array = self::get_manifests_in_directory(self::$MINI_THEMES_STANDARD_DIRECTORY, self::$MINI_THEMES_STANDARD_URL);
-
-            $combined_manifest_array = &$user_manifest_array;
-
-            // stuff in user manifest array can override standard manifests
-            foreach ($standard_manifest_array as $sman)
-            {
-
-                $contains = false;
-
-                foreach ($combined_manifest_array as $man)
-                {
-
-                    if ($sman->key == $man->key)
-                    {
-                        $contains = true;
-                        break;
-                    }
-                }
-
-                if (!$contains)
-                {
-                    array_push($combined_manifest_array, $sman);
-                }
-            }
-            return $combined_manifest_array;
-        }
-
-        public static function get_manifests_in_directory($directory, $mini_theme_base_url)
-        {
-
-            $manifest_array = array();
-            $dirs = glob($directory . "*", GLOB_ONLYDIR);
-
-            sort($dirs);
-
-            foreach ($dirs as $dir)
-            {
-
-                $manifest = null;
-                $manifest_path = $dir . "/manifest.json";
-
-                if (file_exists($manifest_path))
-                {
-
-                    $manifest_text = file_get_contents($manifest_path);
-
-                    if ($manifest_text != false)
-                    {
-
-                        $manifest = json_decode($manifest_text);
-                    }
-                    else
-                    {
-
-                        self::log("Problem reading manifest in $dir ($dirs)");
-                    }
-                }
-                else
-                {
-
-                    // Manifest not present so assumption is they just want a generic mini-theme
-                    $manifest = new stdClass();
-
-                    self::add_property($manifest, 'title', basename($dir));
-                    self::add_property($manifest, 'page', 'index.html');
-                    self::add_property($manifest, 'description', 'User Mini Theme');
-                    self::add_property($manifest, 'author_name', '');
-                    self::add_property($manifest, 'website_url', '');
-                    self::add_property($manifest, 'google_plus_author_url', '');
-                    self::add_property($manifest, 'original_release_date', '2013/01/01');
-                    self::add_property($manifest, 'latest_version_date', '2013/01/01');
-                    self::add_property($manifest, 'version', '1.0.0');
-                    self::add_property($manifest, 'release_notes', '');
-                    self::add_property($manifest, 'screenshot', self::$MINI_THEMES_IMAGES_URL . "user-defined.png");
-                    self::add_property($manifest, 'autodownload', false);
-                    self::add_property($manifest, 'responsive', true);
-                }
-
-                if ($manifest != null)
-                {
-
-                    // RSR TODO: Have a way to give each item a unique key if it conflicts..?
-                    self::add_property($manifest, 'key', basename($dir));
-                    self::add_property($manifest, 'dir', $dir);
-                    self::add_property($manifest, 'manifest_path', $manifest_path);
-                    self::add_property($manifest, 'mini_theme_url', $mini_theme_base_url . $manifest->key);
-
-                    array_push($manifest_array, $manifest);
-                }
-            }
-
-            return $manifest_array;
-        }
+        }          
 
         public static function add_property(&$obj, $property, $value)
         {
@@ -391,49 +205,7 @@ if (!class_exists('SC_EDD_SL_CM_U'))
 
             SC_EDD_SL_CM_U::log($message . ":" . var_export($object, true));
         }
-
-        public static function is_current_url_unfiltered($config)
-        {
-            $requested = strtolower($_SERVER['REQUEST_URI']);
-
-            $config->unfiltered_urls = strtolower($config->unfiltered_urls);
-            $urls = preg_split('/\r\n|[\r\n]/', $config->unfiltered_urls);
-
-            $is_unfiltered = false;           
-            
-            foreach ($urls as $url)
-            {                
-                $trimmed_url = trim($url);
-                if ((strpos($requested, $trimmed_url) === 0))
-                {
-                    $is_unfiltered = true;
-                    break;
-                }
-            }
-
-            return $is_unfiltered;
-        }
-		
-		public static function is_current_ip_allowed($config)
-        {
-            $remote_addr = strtolower($_SERVER['REMOTE_ADDR']);
-
-            $allowed_ips = preg_split('/\r\n|[\r\n]/', $config->allowed_ips);
-
-            $is_allowed = false;           
-            
-            foreach ($allowed_ips as $allowed_ip)
-            {
-                if ($remote_addr == $allowed_ip)
-                {
-                    $is_allowed = true;
-                    break;
-                }
-            }
-
-            return $is_allowed;
-        }
-
+        
         public static function append_query_value($url, $key, $value)
         {
             $separator = (parse_url($url, PHP_URL_QUERY) == NULL) ? '?' : '&';

@@ -24,7 +24,7 @@
 if (!class_exists('SC_EDD_Verifier_Base')) {
 
     /**     
-     * @author Bob Riley <support@snapcreek.com>
+     * @author Snap Creek Software <support@snapcreek.com>
      * @copyright 2014 Snap Creek LLC
      */
     class SC_EDD_Verifier_Base {
@@ -46,7 +46,7 @@ if (!class_exists('SC_EDD_Verifier_Base')) {
 if (!class_exists('SC_EDD_Range_Verifier')) {
 
     /**
-     * @author Bob Riley <support@snapcreek.com>
+     * @author Snap Creek Software <support@snapcreek.com>
      * @copyright 2014 Snap Creek LLC
      */
     class SC_EDD_Range_Verifier extends SC_EDD_Verifier_Base {
@@ -79,7 +79,7 @@ if (!class_exists('SC_EDD_Range_Verifier')) {
 if (!class_exists('SC_EDD_Length_Verifier')) {
 
     /**
-     * @author Bob Riley <support@snapcreek.com>
+     * @author Snap Creek Software <support@snapcreek.com>
      * @copyright 2014 Snap Creek LLC
      */
     class SC_EDD_Length_Verifier extends SC_EDD_Verifier_Base {
@@ -116,7 +116,7 @@ if (!class_exists('SC_EDD_Length_Verifier')) {
 if (!class_exists('SC_EDD_Email_Verifier')) {
 
     /**
-     * @author Bob Riley <support@snapcreek.com>
+     * @author Snap Creek Software <support@snapcreek.com>
      * @copyright 2014 Snap Creek LLC
      */
     class SC_EDD_Email_Verifier extends SC_EDD_Verifier_Base {
@@ -156,7 +156,7 @@ if (!class_exists('SC_EDD_Email_Verifier')) {
 if (!class_exists('SC_EDD_Required_Verifier')) {
 
     /**
-     * @author Bob Riley <support@snapcreek.com>
+     * @author Snap Creek Software <support@snapcreek.com>
      * @copyright 2014 Snap Creek LLC
      */
     class SC_EDD_Required_Verifier extends SC_EDD_Verifier_Base {
@@ -188,7 +188,7 @@ if (!class_exists('SC_EDD_Required_Verifier')) {
 if (!class_exists('SC_EDD_Regex_Verifier')) {
 
     /**
-     * @author Bob Riley <support@snapcreek.com>
+     * @author Snap Creek Software <support@snapcreek.com>
      * @copyright 2014 Snap Creek LLC
      */
     class SC_EDD_Regex_Verifier extends SC_EDD_Verifier_Base {
