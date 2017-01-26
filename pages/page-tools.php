@@ -34,12 +34,8 @@
         <h2 class="nav-tab-wrapper">  
             <a href="?page=<?php echo SC_EDD_CM_Constants::PLUGIN_SLUG . '&tab=main' ?>" class="nav-tab <?php echo $active_tab == 'main' ? 'nav-tab-active' : ''; ?>"><?php SC_EDD_CM_U::_e('Main'); ?></a>  
         </h2>
-        <form id="easy-pie-cs-main-form" method="post" action="<?php echo admin_url('admin.php?page=' . SC_EDD_CM_Constants::$TOOLS_SUBMENU_SLUG . '&tab=' . $active_tab); ?>" > 
-            <?php
-            //  settings_fields(SC_EDD_CM_Constants::MAIN_PAGE_KEY);
-            //do_settings_sections(SC_EDD_CM_Constants::MAIN_PAGE_KEY);                        
-
-            ?>      
+        <form id="sc-edd-cm-main-form" method="post" action="<?php echo admin_url('admin.php?page=' . SC_EDD_CM_Constants::$TOOLS_SUBMENU_SLUG . '&tab=' . $active_tab); ?>" >    
+			<input type="hidden" name="sc-edd-cm-form-action" id="sc-edd-cm-form-action" />
             <div id='tab-holder'>
                 <?php
                 if ($active_tab == 'main') {
@@ -48,19 +44,7 @@
                 
                 ?>         
                 <!-- after redirect -->
-            </div>           
-
-<!--            <input type="hidden" id="sc-edd-cm-submit-type" name="sc-edd-cm-submit-type" value="save"/>
-            
-            <p>
-     
-           <input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes" />
-                <input style="margin-left:15px" type="submit" name="submit" id="submit" class="button button-primary" value="Save & Preview" onclick="document.getElementById('sc-edd-cm-submit-type').value = 'preview';debugger;return true;"/>
-            </p>                -->
-
-            <a href="https://snapcreek.com/ezp-coming-soon/docs/faqs-tech/" target="_blank"><?php SC_EDD_CM_U::_e('FAQ'); ?></a>
-            |           
-            <a href="https://snapcreek.com/support/" target="_blank"><?php SC_EDD_CM_U::_e('Contact') ?></a>
+            </div>
         </form>
     </div>
 </div>

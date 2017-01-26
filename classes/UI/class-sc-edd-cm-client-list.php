@@ -269,7 +269,7 @@ if (!class_exists('SC_EDD_CM_Client_List_Control'))
 					'url' => $client->url,
 				);
 				
-				$client->expiration_date = get_license_expiration( $license_id );
+				$client->expiration_date = $edd_swl->get_license_expiration( $license_id );
 				
 				$payment_id  = get_post_meta( $license_id, '_edd_sl_payment_id', true );
 				$client->customer_id = edd_get_payment_customer_id( $payment_id );

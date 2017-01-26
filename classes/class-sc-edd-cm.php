@@ -82,6 +82,7 @@ if (!class_exists('SC_EDD_SL_CM'))
 
 		function edd_check_license_handler($data)
 		{
+			SC_EDD_SL_CM_U::log_object("check license handler", $data);
 			$item_id     = ! empty( $data['item_id'] )   ? absint( $data['item_id'] ) : -1;
 			$item_name   = ! empty( $data['item_name'] ) ? rawurldecode( $data['item_name'] ) : '';
 			$license_key     = urldecode( $data['license'] );
@@ -113,7 +114,9 @@ if (!class_exists('SC_EDD_SL_CM'))
 				$client->first_hit_timestamp = time();
 			}
 			
-
+			SC_EDD_CM_U::log_object("saving client", $client);
+			
+			$client->save();
 		}
 		
 		function add_class_filter($tag, $method_name)

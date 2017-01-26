@@ -2,53 +2,36 @@
 require_once(SC_EDD_CM_U::$PLUGIN_DIRECTORY . '/classes/UI/class-sc-edd-cm-client-list.php');
 
 $export_nonce = wp_create_nonce('easy-pie-cspe-export-subscribers');
+
 ?>
 
 <div class="wrap">
 
 	<?php screen_icon(SC_EDD_CM_Constants::PLUGIN_SLUG); ?>
-	<?php
-	if (isset($_GET['settings-updated']))
-	{
-		echo "<div class='updated'><p>" . SC_EDD_CM_U::__('If you have a caching plugin, be sure to clear the cache!') . "</p></div>";
-	}
-	?>
     <div id="sc-edd-cm-options" class="inside">
 <?php
-/*
-  Coming Soon & Maintenance Elite Plugin
-  Copyright (C) 2017, Snap Creek LLC
-  website: snapcreek.com contact: support@snapcreek.com
-
-  Coming Soon & Maintenance Elite Plugin is distributed under the GNU General Public License, Version 3,
-  June 2007. Copyright (C) 2007 Free Software Foundation, Inc., 51 Franklin
-  St, Fifth Floor, Boston, MA 02110, USA
-
-  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
-  ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-  (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-  LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
-$nonce_action = 'easy-pie-cspe-export-subscribers';
+$nonce_action = 'sc-edd-cm-export-subscribers';
 $nonce = wp_create_nonce($nonce_action);
 
-if(isset($_REQUEST['action']))
+
+if(isset($_REQUEST['sc-edd-cm-form-action']))
 {
-    $action = $_REQUEST['action'];
-    
-    if($action == 'delete')
-    {
-        $subscriber_id = $_REQUEST['subscriber_id'];
-        
-        SC_EDD_CMSubscriber_Entity::delete_by_id($subscriber_id);
-    }
+	switch($_REQUEST['sc-edd-cm-form-action'])
+	{
+		case 'add-test-client':
+			$client = new SC_EDD_CM_Client_Entity();
+			
+			$client->first_hit_timestamp = time() - 120;
+			$client->last_hit_timestamp = time() - 120;
+			$client->ip = "127.0.0.1";
+			$client->item_id = 0;
+			$client->license_key = "12345678901234567890123456789012";
+			$client->num_hits = 3;
+			$client->url = "http://localhost";
+			
+			$client->save();
+			break;
+	}
 }
 
 $search = null;
@@ -139,6 +122,8 @@ $global = SC_EDD_CM_Global_Entity::get_instance();
         <div class="wrap">             
             <div id="sc-edd-cm-options" class="inside">
             <?php $client_list_control->display(); ?>            
+				
+				<button onclick="sc.edd.cm.tools.addTestClient(); return false;" /><?php echo SC_EDD_CM_U::_e('Add Client'); ?> </button>
             </div>                                    
         </div>
     </div>
@@ -156,6 +141,11 @@ jQuery(document).ready(function ($) {
 	sc.edd = {};
 	sc.edd.cm = {};
 	sc.edd.cm.tools = {};
-	sc.edd.cm.tools.import = {};
+	
+	sc.edd.cm.tools.addTestClient = function() {
+		
+		jQuery("#sc-edd-cm-form-action").val("add-test-client");
+		jQuery("#sc-edd-cm-main-form").submit();
+	}
 });
 </script>

@@ -54,8 +54,8 @@ if (!class_exists('SC_EDD_CM_Client_Entity')) {
             $field_info = array();
             
             $field_info['item_id'] = 'int';
-			$field_info['source_ip'] = 'varchar(15)';
-			$field_info['source_site'] = 'varchar(2084)';
+			$field_info['ip'] = 'varchar(15)';
+			$field_info['url'] = 'varchar(2084)';
             $field_info['first_hit_timestamp'] = 'int';
 			$field_info['last_hit_timestamp'] = 'int';
 			$field_info['num_hits'] = 'int';
@@ -63,7 +63,7 @@ if (!class_exists('SC_EDD_CM_Client_Entity')) {
             
             $index_array = array();
             			
-            $index_array['source_ip_idx'] = 'source_ip';
+            $index_array['ip_idx'] = 'ip';
 			
             self::generic_init_table($field_info, self::$TABLE_NAME, $index_array, 'utf8', 'utf8_unicode_ci');
         } 
