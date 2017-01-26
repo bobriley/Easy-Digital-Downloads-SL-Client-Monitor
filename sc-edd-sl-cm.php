@@ -33,6 +33,6 @@
 
 require_once("classes/class-sc-edd-cm.php");
 
-$SC_EDD_SL_CM = new SC_EDD_SL_CM(__FILE__);
+$SC_EDD_CM = new SC_EDD_CM(__FILE__);
 
 ?>

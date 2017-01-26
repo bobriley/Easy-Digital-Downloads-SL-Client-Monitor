@@ -19,7 +19,6 @@
   (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
 require_once(dirname(__FILE__) . '/Utilities/class-sc-edd-cm-u.php');
 require_once(dirname(__FILE__) . '/Utilities/class-sc-edd-cm-query-u.php');
 
@@ -31,14 +30,14 @@ require_once("Entities/class-sc-edd-cm-client-entity.php");
 require_once('class-sc-edd-cm-plugin-base.php');
 require_once('class-sc-edd-cm-constants.php');
 
-if (!class_exists('SC_EDD_SL_CM'))
+if (!class_exists('SC_EDD_CM'))
 {
 
 	/**
 	 * @author Snap Creek Software <support@snapcreek.com>
 	 * @copyright 2017 Snap Creek LLC
 	 */
-	class SC_EDD_SL_CM extends SC_EDD_CM_Plugin_Base
+	class SC_EDD_CM extends SC_EDD_CM_Plugin_Base
 	{
 		/**
 		 * Constructor
@@ -57,9 +56,9 @@ if (!class_exists('SC_EDD_SL_CM'))
 			{
 
 				//- Hook Handlers
-				register_activation_hook($plugin_file_path, array('SC_EDD_SL_CM', 'activate'));
-				register_deactivation_hook($plugin_file_path, array('SC_EDD_SL_CM', 'deactivate'));
-				register_uninstall_hook($plugin_file_path, array('SC_EDD_SL_CM', 'uninstall'));
+				register_activation_hook($plugin_file_path, array('SC_EDD_CM', 'activate'));
+				register_deactivation_hook($plugin_file_path, array('SC_EDD_CM', 'deactivate'));
+				register_uninstall_hook($plugin_file_path, array('SC_EDD_CM', 'uninstall'));
 
 				//- Actions
 				$this->add_class_action('admin_init', 'admin_init_handler');
@@ -82,7 +81,7 @@ if (!class_exists('SC_EDD_SL_CM'))
 
 		function edd_check_license_handler($data)
 		{
-			SC_EDD_SL_CM_U::log_object("check license handler", $data);
+			SC_EDD_CM_U::log_object("check license handler", $data);
 			$item_id     = ! empty( $data['item_id'] )   ? absint( $data['item_id'] ) : -1;
 			$item_name   = ! empty( $data['item_name'] ) ? rawurldecode( $data['item_name'] ) : '';
 			$license_key     = urldecode( $data['license'] );
@@ -95,7 +94,7 @@ if (!class_exists('SC_EDD_SL_CM'))
 
 //			$customer = new EDD_Customer( $customer_id );
 
-			$sl_client = SC_EDD_SL_Client_Entity::get_by_license_key($license_key);
+			$sl_client = SC_EDD_CM_Client_Entity::get_by_license_key($license_key);
 			
 			if($client == null)
 			{
@@ -277,7 +276,7 @@ if (!class_exists('SC_EDD_SL_CM'))
             $args = array(
                 'label' => SC_EDD_CM_U::__('SL Clients'),
                 'default' => 10,
-                'option' => 'sc_edd_sl_clients_per_page'
+                'option' => 'sc_edd_clients_per_page'
             );
 
             add_screen_option($option, $args);

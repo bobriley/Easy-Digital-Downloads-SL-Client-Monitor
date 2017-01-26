@@ -1,4 +1,4 @@
- <?php
+<?php
 /*
   Easy Digital Downloads Software Licensing Client Monitor Plugin
   Copyright (C) 2017, Snap Creek LLC

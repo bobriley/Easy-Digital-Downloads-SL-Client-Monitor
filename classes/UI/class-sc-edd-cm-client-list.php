@@ -98,7 +98,7 @@ if (!class_exists('SC_EDD_CM_Client_List_Control'))
 			$data = $this->get_table_data();
 			usort($data, array(&$this, 'sort_data'));
 
-			$perPage = $this->get_items_per_page('sc_edd_sl_clients_per_page', 10);
+			$perPage = $this->get_items_per_page('sc_edd_clients_per_page', 10);
 			$currentPage = $this->get_pagenum();
 			$totalItems = count($data);
 
