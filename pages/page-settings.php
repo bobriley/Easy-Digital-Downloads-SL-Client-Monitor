@@ -22,19 +22,19 @@ else
 
 <div class="wrap">
 
-    <h2><?php SC_EDD_SL_CM_U::_e('Settings'); ?></h2>
+    <h2><?php SC_EDD_CM_U::_e('Settings'); ?></h2>
     <?php
 
-    $global = SC_EDD_SL_CM_Global_Entity::get_instance();
+    $global = SC_EDD_CM_Global_Entity::get_instance();
 
     ?>
 
-    <div id="sc-edd-sl-cm-options" class="inside">
+    <div id="sc-edd-cm-options" class="inside">
         <h2 class="nav-tab-wrapper">  
-            <a href="?page=<?php echo SC_EDD_SL_CM_Constants::$SETTINGS_SUBMENU_SLUG . '&tab=main' ?>" class="nav-tab <?php echo $active_tab == 'main' ? 'nav-tab-active' : ''; ?>"><?php SC_EDD_SL_CM_U::_e('General'); ?></a>  
+            <a href="?page=<?php echo SC_EDD_CM_Constants::$SETTINGS_SUBMENU_SLUG . '&tab=main' ?>" class="nav-tab <?php echo $active_tab == 'main' ? 'nav-tab-active' : ''; ?>"><?php SC_EDD_CM_U::_e('General'); ?></a>  
         </h2>
         
-        <form name="sc_edd_cm_main_form" id="sc_edd_cm_main_form" method="post" action="<?php echo admin_url('admin.php?page=' . SC_EDD_SL_CM_Constants::$SETTINGS_SUBMENU_SLUG . '&tab=' . $active_tab); ?>" > 
+        <form name="sc_edd_cm_main_form" id="sc_edd_cm_main_form" method="post" action="<?php echo admin_url('admin.php?page=' . SC_EDD_CM_Constants::$SETTINGS_SUBMENU_SLUG . '&tab=' . $active_tab); ?>" > 
             <div id='tab-holder'>
                 <?php
                 if ($active_tab == 'main')
@@ -44,7 +44,7 @@ else
                 ?>   
             </div>           
 
-            <input type="hidden" id="sc-edd-sl-cm-submit-type" name="sc-edd-sl-cm-submit-type" value="save"/>
+            <input type="hidden" id="sc-edd-cm-submit-type" name="sc-edd-cm-submit-type" value="save"/>
 
             <p>
                 <input type="submit" name="submit2" id="submit2" class="button button-primary" value="Save Changes" />

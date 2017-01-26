@@ -1,17 +1,6 @@
 <?php
 /*
-  Plugin Name: Easy Digital Downloads - SL Client Monitor
-  Plugin URI: http://snapcreek.com
-  Description: Monitors and blocks Easy Digital Downloads Software Licensing clients
-  Version: 0.0.1
-  Author: Snap Creek LLC
-  Author URI: https://snapcreek.com
-  Text Domain: snapcreek
-  License: GPL v3 
-*/
-
-/*
-  Easy Digital Downloads Software Licensing Client Monitor
+  Easy Digital Downloads Software Licensing Client Monitor Plugin
   Copyright (C) 2017, Snap Creek LLC
   website: snapcreek.com contact: support@snapcreek.com
 
@@ -30,9 +19,51 @@
   (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+require_once('class-sc-edd-cm-json-entity-base.php');
 
-require_once("classes/class-sc-edd-cm.php");
+if (!class_exists('SC_EDD_CM_Global_Entity'))
+{
 
-$SC_EDD_SL_CM = new SC_EDD_SL_CM(__FILE__);
+	/**
+	 * @author Snap Creek Software <support@snapcreek.com>
+	 * @copyright 2017 Snap Creek LLC
+	 */
+	class SC_EDD_CM_Global_Entity extends SC_EDD_CM_JSON_Entity_Base
+	{
+		const TYPE = "SC_EDD_CM_Global_Entity";
 
+		public $collection_enabled = false;
+
+		function __construct()
+		{
+
+			parent::__construct();
+		}
+
+		public static function initialize_plugin_data()
+		{
+			$globals = SC_EDD_CM_JSON_Entity_Base::get_by_type(self::TYPE);
+
+			if ($globals == null)
+			{
+				$global = new SC_EDD_CM_Global_Entity();
+
+				$global->save();
+			}
+		}
+
+		public static function get_instance()
+		{
+			$global = null;
+			$globals = SC_EDD_CM_JSON_Entity_Base::get_by_type(self::TYPE);
+
+			if ($globals != null)
+			{
+				$global = $globals[0];
+			}
+
+			return $global;
+		}
+	}
+}
 ?>

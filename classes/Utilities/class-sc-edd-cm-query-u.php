@@ -1,21 +1,10 @@
 <?php
 /*
-  Plugin Name: Easy Digital Downloads - SL Client Monitor
-  Plugin URI: http://snapcreek.com
-  Description: Monitors and blocks Easy Digital Downloads Software Licensing clients
-  Version: 0.0.1
-  Author: Snap Creek LLC
-  Author URI: https://snapcreek.com
-  Text Domain: snapcreek
-  License: GPL v3 
-*/
-
-/*
-  Easy Digital Downloads Software Licensing Client Monitor
+  Coming Soon & Maintenance Elite Plugin
   Copyright (C) 2017, Snap Creek LLC
   website: snapcreek.com contact: support@snapcreek.com
 
-  Easy Digital Downloads Software Licensing Client Monitor Plugin is distributed under the GNU General Public License, Version 3,
+  Coming Soon & Maintenance Elite Plugin is distributed under the GNU General Public License, Version 3,
   June 2007. Copyright (C) 2007 Free Software Foundation, Inc., 51 Franklin
   St, Fifth Floor, Boston, MA 02110, USA
 
@@ -31,8 +20,45 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-require_once("classes/class-sc-edd-cm.php");
+require_once(dirname(__FILE__) . '/../class-sc-edd-cm-constants.php');
 
-$SC_EDD_SL_CM = new SC_EDD_SL_CM(__FILE__);
+if (!class_exists('SC_EDD_Query_U'))
+{
 
+	/**
+	 * @author Snap Creek Software <support@snapcreek.com>
+	 * @copyright 2017 Snap Creek LLC
+	 */
+	class SC_EDD_Query_U
+	{
+		const NUMBER_PER_PAGE = 20;
+
+		// const NUMBER_PER_PAGE = 1;
+
+		public static function is_table_present($simple_table_name)
+		{
+			global $wpdb;
+
+			$table_name = $wpdb->prefix . $simple_table_name;
+
+			$table_query = "SHOW TABLES LIKE %s";
+			$prepared_table_query = $wpdb->prepare($table_query, $table_name);
+
+			$table_rows = $wpdb->get_results($prepared_table_query);
+
+			if (count($table_rows) == 0)
+			{
+
+				return false;
+			}
+			else
+			{
+
+				return true;
+			}
+		}
+
+	}
+
+}
 ?>

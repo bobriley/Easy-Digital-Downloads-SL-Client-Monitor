@@ -1,17 +1,6 @@
 <?php
 /*
-  Plugin Name: Easy Digital Downloads - SL Client Monitor
-  Plugin URI: http://snapcreek.com
-  Description: Monitors and blocks Easy Digital Downloads Software Licensing clients
-  Version: 0.0.1
-  Author: Snap Creek LLC
-  Author URI: https://snapcreek.com
-  Text Domain: snapcreek
-  License: GPL v3 
-*/
-
-/*
-  Easy Digital Downloads Software Licensing Client Monitor
+  Easy Digital Downloads Software Licensing Client Monitor Plugin
   Copyright (C) 2017, Snap Creek LLC
   website: snapcreek.com contact: support@snapcreek.com
 
@@ -31,8 +20,37 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-require_once("classes/class-sc-edd-cm.php");
+if (!class_exists('SC_EDD_CM_Constants'))
+{
 
-$SC_EDD_SL_CM = new SC_EDD_SL_CM(__FILE__);
+	/**
+	 * @author Snap Creek Software <support@snapcreek.com>
+	 * @copyright 2017 Snap Creek LLC
+	 */
+	class SC_EDD_CM_Constants
+	{
+		const PLUGIN_SLUG = 'sc-edd-cm';
+		const PLUGIN_VERSION = "0.0.1"; // RSR Version
+		const PLUGIN_VERSION_OPTION_KEY = "sc_edd_cm_version"; // RSR Version
 
+		/* Pseudo constants */
+		public static $PLUGIN_DIR;
+		public static $TOOLS_SUBMENU_SLUG;
+		public static $SETTINGS_SUBMENU_SLUG;
+
+		public static function init()
+		{
+
+			$__dir__ = dirname(__FILE__);
+
+			self::$PLUGIN_DIR = $__dir__ . "../" . self::PLUGIN_SLUG;
+
+			self::$TOOLS_SUBMENU_SLUG = SC_EDD_CM_Constants::PLUGIN_SLUG;
+			self::$SETTINGS_SUBMENU_SLUG = SC_EDD_CM_Constants::PLUGIN_SLUG . '-settings';
+		}
+
+	}
+
+	SC_EDD_CM_Constants::init();
+}
 ?>
