@@ -66,7 +66,19 @@ if (!class_exists('SC_EDD_CM_Client_Entity')) {
             $index_array['ip_idx'] = 'ip';
 			
             self::generic_init_table($field_info, self::$TABLE_NAME, $index_array, 'utf8', 'utf8_unicode_ci');
-        } 
+        }
+		
+		/*
+         * Only INNODB supports foreign key constraints so no cascading changes!
+         */
+
+        public function delete() {
+
+            self::delete_by_id($this->id);
+
+            $this->id = -1;
+            $this->dirty = false;
+        }
                 
         public static function delete_by_id($id) {
         
@@ -104,14 +116,14 @@ if (!class_exists('SC_EDD_CM_Client_Entity')) {
 		{
 			$license_key = trim($license_key);
 			
-			return self::get_by_unique_field_and_type('license_key', $license_key, get_class($this), self::$TABLE_NAME);
+			return self::get_by_unique_field_and_type('license_key', $license_key, 'SC_EDD_CM_Client_Entity', self::$TABLE_NAME);
 		}
 		
 		public static function get_by_source_site($source_site)
 		{
 			$source_site = trim($source_site);
 			
-			return self::get_by_unique_field_and_type('source_site', $source_site, get_class($this), self::$TABLE_NAME);
+			return self::get_by_unique_field_and_type('source_site', $source_site, 'SC_EDD_CM_Client_Entity', self::$TABLE_NAME);
 		}
     }
 }

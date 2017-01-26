@@ -94,7 +94,7 @@ if (!class_exists('SC_EDD_CM'))
 
 //			$customer = new EDD_Customer( $customer_id );
 
-			$sl_client = SC_EDD_CM_Client_Entity::get_by_license_key($license_key);
+			$client = SC_EDD_CM_Client_Entity::get_by_license_key($license_key);
 			
 			if($client == null)
 			{

@@ -186,19 +186,7 @@ if (!class_exists('SC_EDD_Standard_Entity_Base')) {
             
             return true;
         }
-
-        /*
-         * Only INNODB supports foreign key constraints so no cascading changes!
-         */
-
-        public function delete() {
-
-            self::delete_by_id($this->id, $this->table_name);
-
-            $this->id = -1;
-            $this->dirty = false;
-        }
-
+		
         /*
          * Only INNODB supports foreign key constraints so no cascading changes!
          */

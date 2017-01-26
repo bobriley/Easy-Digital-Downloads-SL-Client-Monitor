@@ -161,6 +161,7 @@ if (!class_exists('SC_EDD_CM_Client_List_Control'))
 
 		public function process_bulk_action()
 		{
+			error_log("process_bulk action");
 			apply_filters("debug", "process bulk start");
 			// RSR TODO
 			// security check!
@@ -175,17 +176,38 @@ if (!class_exists('SC_EDD_CM_Client_List_Control'))
 
 			$action = $this->current_action();
 
-			if ($action == 'delete')
+			error_log("action=$action");
+						
+			if (isset($_REQUEST['entity_id']))
 			{
-				if (isset($_REQUEST['id']))
+				$entity_ids = $_REQUEST['entity_id'];
+
+				if(count($entity_ids) > 0)
 				{
-					$entity_ids = $_REQUEST['id'];
+					if ($action == 'block')
+					{	
+						echo 'Order Deny,Allow<br/>';
+					}
+					
 
 					foreach ($entity_ids as $entity_id)
-					{
-						SC_EDD_CM_U::debug("deleting $entity_id");
-						SC_EDD_CM_Client_Entity::delete_by_id($entity_id);
+					{						
+						/* @var $client SC_EDD_CM_Client_Entity */
+						$client = SC_EDD_CM_Client_Entity::get_by_id($entity_id);
+
+						if($action == 'block')
+						{
+							echo "Deny from {$client->ip}<br/>";						
+						}
+						else
+						{
+							$client->delete();
+						}
 					}
+				}
+				else
+				{
+					echo "Nothing selected.";
 				}
 			}
 
@@ -233,8 +255,9 @@ if (!class_exists('SC_EDD_CM_Client_List_Control'))
 		{
 			$actions = array();
 
+			$actions ['block'] = SC_EDD_CM_U::__('Block');
 			$actions ['delete'] = SC_EDD_CM_U::__('Delete');
-
+			
 			return $actions;
 		}
 
@@ -258,6 +281,13 @@ if (!class_exists('SC_EDD_CM_Client_List_Control'))
 
 				$edd_swl = EDD_Software_Licensing::instance();
 
+				$args = array(
+					'item_id' => $client->item_id,
+					'item_name' => $item_name,
+					'key' => $client->license_key,
+					'url' => $client->url,
+				);
+				
 				$result = $edd_swl->check_license($args);
 
 				$license_id = $edd_swl->get_license_by_key($client->license_key);
@@ -266,12 +296,7 @@ if (!class_exists('SC_EDD_CM_Client_List_Control'))
 
 				$item_name = get_the_title($client->item_id);
 
-				$args = array(
-					'item_id' => $client->item_id,
-					'item_name' => $item_name,
-					'key' => $client->license_key,
-					'url' => $client->url,
-				);
+				//RSR TODO: Need to display license status based on result
 				
 				$client->expiration_date = $edd_swl->get_license_expiration( $license_id );
 				
@@ -319,6 +344,12 @@ if (!class_exists('SC_EDD_CM_Client_List_Control'))
 		{
 			return sprintf('<input type="checkbox" name="entity_id[]" value="%s" />', $item['id']);
 		}
+		
+//		function column_customer_id($item)
+//		{
+//			//https://easypiewp.com/wp-admin/edit.php?post_type=download&page=edd-customers&view=overview&id=351
+//			
+//		}
 
 		function column_first_hit_timestamp($item)
 		{
