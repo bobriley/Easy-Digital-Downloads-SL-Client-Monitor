@@ -68,20 +68,21 @@ if (!class_exists('SC_EDD_CM_Client_List_Control'))
 		 */
 		public function column_default($item, $column_name)
 		{
-			switch ($column_name)
-			{
-				case 'item_id':
-				case 'url':
-				case 'ip':
-				case 'first_hit_timestamp':
-				case 'last_hit_timestamp':
-				case 'num_hits':
-				case 'license_key':
-					return $item[$column_name];
-
-				default:
-					return print_r($item, true);
-			}
+			return $item[$column_name];
+//			switch ($column_name)
+//			{
+//				case 'item_id':
+//				case 'url':
+//				case 'ip':
+//				case 'first_hit_timestamp':
+//				case 'last_hit_timestamp':
+//				case 'num_hits':
+//				case 'license_key':
+//					return $item[$column_name];
+//
+//				default:
+//					return print_r($item, true);
+//			}
 		}
 
 		public function prepare_items()
@@ -250,6 +251,9 @@ if (!class_exists('SC_EDD_CM_Client_List_Control'))
 				$seconds_diff = $client->last_hit_timestamp - $client->first_hit_timestamp;
 				$days_diff = $seconds_diff / 86400;
 				
+				$days_diff++;
+
+				
 				$client->hits_per_day = $client->num_hits / $days_diff;
 
 				$edd_swl = EDD_Software_Licensing::instance();
@@ -324,7 +328,7 @@ if (!class_exists('SC_EDD_CM_Client_List_Control'))
 			}
 			else
 			{
-				return date('M j, g:i:s a', $item['column_first_hit_timestamp']);
+				return date('M j, g:i:s a', $item['first_hit_timestamp']);
 			}
 		}
 
@@ -336,7 +340,7 @@ if (!class_exists('SC_EDD_CM_Client_List_Control'))
 			}
 			else
 			{
-				return date('M j, g:i:s a', $item['column_first_hit_timestamp']);
+				return date('M j, g:i:s a', $item['last_hit_timestamp']);
 			}
 		}
 	}

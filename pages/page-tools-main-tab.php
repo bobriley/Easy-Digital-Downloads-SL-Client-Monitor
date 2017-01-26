@@ -22,7 +22,7 @@ if(isset($_REQUEST['sc-edd-cm-form-action']))
 			$client = new SC_EDD_CM_Client_Entity();
 			
 			$client->first_hit_timestamp = time() - 120;
-			$client->last_hit_timestamp = time() - 120;
+			$client->last_hit_timestamp = time();
 			$client->ip = "127.0.0.1";
 			$client->item_id = 0;
 			$client->license_key = "12345678901234567890123456789012";
