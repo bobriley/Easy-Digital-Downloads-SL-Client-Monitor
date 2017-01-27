@@ -223,7 +223,7 @@ if (!class_exists('SC_EDD_CM_Client_List_Control'))
 				'cb' => '<input type="checkbox" />',
 				//   'id' => SC_EDD_CM_U::__('ID'),                
 				//'item_id' => SC_EDD_CM_U::__('Item ID'),
-				'item_id' => SC_EDD_CM_U::__('Item'),
+				'item_name' => SC_EDD_CM_U::__('Item'),
 				'url' => SC_EDD_CM_U::__('URL'),
 				'ip' => SC_EDD_CM_U::__('IP'),
 				'first_hit_timestamp' => SC_EDD_CM_U::__('Initial Hit'),
@@ -283,8 +283,8 @@ if (!class_exists('SC_EDD_CM_Client_List_Control'))
 				$edd_swl = EDD_Software_Licensing::instance();
 
 				$args = array(
-					'item_id' => $client->item_id,
-					'item_name' => $item_name,
+					'item_id' => false,
+					'item_name' => $client->item_name,
 					'key' => $client->license_key,
 					'url' => $client->url,
 				);
@@ -295,7 +295,7 @@ if (!class_exists('SC_EDD_CM_Client_List_Control'))
 
 				$client->activations = $edd_swl->get_site_count($license_id);
 
-				$item_name = get_the_title($client->item_id);
+			//	$item_name = get_the_title($client->item_id);
 
 				//RSR TODO: Need to display license status based on result
 				

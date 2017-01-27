@@ -50,12 +50,19 @@ if (!class_exists('SC_EDD_Standard_Entity_Base')) {
             $this->table_name = $wpdb->prefix . $base_table_name;
         }
 
-        protected static function generic_init_table($field_information, $base_table_name, $index_array = null, $character_set = null, $collation = null) {
+        protected static function generic_init_table($field_information, $base_table_name, $index_array = null, $character_set = null, $collation = null, $drop_old = true) {
 
             global $wpdb;
 
             $table_name = $wpdb->prefix . $base_table_name;
             
+			if($drop_old)
+			{
+				$drop_query_string = "DROP TABLE IF EXISTS $table_name";
+
+				$wpdb->query($drop_query_string);
+			}
+           			
             if ($index_array != null) {
                                 
                 if ($wpdb->get_var("SHOW TABLES LIKE '$table_name'") == $table_name) {

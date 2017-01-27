@@ -82,7 +82,7 @@ if (!class_exists('SC_EDD_CM'))
 		function edd_check_license_handler($data)
 		{
 			SC_EDD_CM_U::log_object("check license handler", $data);
-			$item_id     = ! empty( $data['item_id'] )   ? absint( $data['item_id'] ) : -1;
+			//$item_id     = ! empty( $data['item_id'] )   ? absint( $data['item_id'] ) : -1;
 			$item_name   = ! empty( $data['item_name'] ) ? rawurldecode( $data['item_name'] ) : '';
 			$license_key     = urldecode( $data['license'] );
 			$url         = isset( $data['url'] ) ? urldecode( $data['url'] ) : '';
@@ -101,7 +101,8 @@ if (!class_exists('SC_EDD_CM'))
 				$client = new SC_EDD_CM_Client_Entity();
 			}
 			
-			$client->item_id = $item_id;
+		//	$client->item_id = $item_id;
+			$client->item_name = $item_name;
 			$client->ip = $_SERVER['REMOTE_ADDR'];
 			$client->url = $url;
 			$client->last_hit_timestamp = time();
