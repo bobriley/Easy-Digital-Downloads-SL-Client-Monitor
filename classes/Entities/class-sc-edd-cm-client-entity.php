@@ -127,11 +127,11 @@ if (!class_exists('SC_EDD_CM_Client_Entity'))
 			return self::get_by_unique_field_and_type('license_key', $license_key, 'SC_EDD_CM_Client_Entity', self::$TABLE_NAME);
 		}
 
-		public static function get_by_source_site($source_site)
+		public static function get_by_ip($ip)
 		{
-			$source_site = trim($source_site);
+			$ip = trim($ip);
 
-			return self::get_by_unique_field_and_type('source_site', $source_site, 'SC_EDD_CM_Client_Entity', self::$TABLE_NAME);
+			return self::get_by_unique_field_and_type('ip', $ip, 'SC_EDD_CM_Client_Entity', self::$TABLE_NAME);
 		}
 
 	}

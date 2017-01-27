@@ -94,7 +94,9 @@ if (!class_exists('SC_EDD_CM'))
 
 //			$customer = new EDD_Customer( $customer_id );
 
-			$client = SC_EDD_CM_Client_Entity::get_by_license_key($license_key);
+			//$client = SC_EDD_CM_Client_Entity::get_by_license_key($license_key);
+			$ip = $_SERVER['REMOTE_ADDR'];
+			$client = SC_EDD_CM_Client_Entity::get_by_ip($ip);
 			
 			if($client == null)
 			{
@@ -103,7 +105,7 @@ if (!class_exists('SC_EDD_CM'))
 			
 		//	$client->item_id = $item_id;
 			$client->item_name = $item_name;
-			$client->ip = $_SERVER['REMOTE_ADDR'];
+			$client->ip = $ip;
 			$client->url = $url;
 			$client->last_hit_timestamp = time();
 			$client->num_hits++;
