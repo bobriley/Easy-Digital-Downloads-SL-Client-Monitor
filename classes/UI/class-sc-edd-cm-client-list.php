@@ -232,6 +232,7 @@ if (!class_exists('SC_EDD_CM_Client_List_Control'))
 				'hits_per_day' => SC_EDD_CM_U::__('Hits/Day'),
 				'activations' => SC_EDD_CM_U::__('Sites'),
 				'license_key' => SC_EDD_CM_U::__('License'),
+				'license_status' => SC_EDD_CM_U::__('Status'),
 				'expiration_date' => SC_EDD_CM_U::__('Expiration'),
 				'customer_id' => SC_EDD_CM_U::__('Customer'),
 			);
@@ -303,6 +304,8 @@ if (!class_exists('SC_EDD_CM_Client_List_Control'))
 				$payment_id  = get_post_meta( $license_id, '_edd_sl_payment_id', true );
 				$client->customer_id = edd_get_payment_customer_id( $payment_id );
 
+				$client->license_status = $result;
+				
 				$data[] = (array) $client;
 			}
 
