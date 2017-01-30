@@ -70,7 +70,7 @@ if (!class_exists('SC_EDD_CM'))
 			
 			if(($global != null) && ($global->collection_enabled))
 			{
-				$this->add_class_action('edd_check_license', 'edd_check_license_handler', 8);
+				$this->add_class_action('edd_get_version', 'edd_get_version_handler', 8);
 			}
 		}
 
@@ -79,7 +79,7 @@ if (!class_exists('SC_EDD_CM'))
 			return add_action($tag, array($this, $method_name), $priority);
 		}
 
-		function edd_check_license_handler($data)
+		function edd_get_version_handler($data)
 		{
 			SC_EDD_CM_U::log_object("check license handler", $data);
 			//$item_id     = ! empty( $data['item_id'] )   ? absint( $data['item_id'] ) : -1;

@@ -31,6 +31,16 @@ if(isset($_REQUEST['sc-edd-cm-form-action']))
 			
 			$client->save();
 			break;
+		
+		case 'purge-all':
+			$clients = SC_EDD_CM_Client_Entity::get_all();
+			
+			foreach($clients as $client)
+			{
+				$client->delete();
+			}
+
+			break;
 	}
 }
 
@@ -124,6 +134,7 @@ $global = SC_EDD_CM_Global_Entity::get_instance();
             <?php $client_list_control->display(); ?>            
 				
 				<button onclick="sc.edd.cm.tools.addTestClient(); return false;" /><?php echo SC_EDD_CM_U::_e('Add Client'); ?> </button>
+				<button onclick="sc.edd.cm.tools.purgeAll(); return false;" /><?php echo SC_EDD_CM_U::_e('PurgeAll'); ?> </button>
             </div>                                    
         </div>
     </div>
@@ -145,6 +156,12 @@ jQuery(document).ready(function ($) {
 	sc.edd.cm.tools.addTestClient = function() {
 		
 		jQuery("#sc-edd-cm-form-action").val("add-test-client");
+		jQuery("#sc-edd-cm-main-form").submit();
+	}
+	
+	sc.edd.cm.tools.purgeAll = function() {
+		
+		jQuery("#sc-edd-cm-form-action").val("purge-all");
 		jQuery("#sc-edd-cm-main-form").submit();
 	}
 });
