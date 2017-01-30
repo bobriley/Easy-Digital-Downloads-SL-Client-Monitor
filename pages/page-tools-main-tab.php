@@ -58,8 +58,18 @@ if (isset($_REQUEST['s']))
 
 $client_list_control = new SC_EDD_CM_Client_List_Control($search, $nonce_action);
 $client_list_control->prepare_items();
-    
+
+/* @var $global SC_EDD_CM_Global_Entity */
 $global = SC_EDD_CM_Global_Entity::get_instance();
+
+if($global->collection_enabled)
+{
+	$collecting = SC_EDD_CM_U::__("(Collecting)");
+}
+else
+{
+	$collecting = SC_EDD_CM_U::__("(Not Collecting)");
+}
 ?>
 
 <style lang="text/css">
@@ -71,7 +81,7 @@ $global = SC_EDD_CM_Global_Entity::get_instance();
 <div class="wrap">
 
     <?php screen_icon(SC_EDD_CM_Constants::PLUGIN_SLUG); ?>
-    <h2><?php SC_EDD_CM_U::_e('EDD SL Clients'); ?></h2>
+	<h2><?php echo SC_EDD_CM_U::__('EDD SL Clients') . " {$collecting}"; ?></h2>
 
     <div id="sc-edd-cm-options" class="inside">
 
