@@ -343,6 +343,18 @@ if (!class_exists('SC_EDD_CM_Client_List_Control'))
 			return -$result;
 		}
 
+		function column_expiration_date($item)
+		{
+			if ($item['expiration_date'] == null)
+			{
+				echo _('Unknown');
+			}
+			else
+			{
+				return date('M j, Y', $item['expiration_date']);
+			}
+		}
+		
 		function column_cb($item)
 		{
 			return sprintf('<input type="checkbox" name="entity_id[]" value="%s" />', $item['id']);

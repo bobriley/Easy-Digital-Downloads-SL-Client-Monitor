@@ -135,7 +135,7 @@ if (!class_exists('SC_EDD_CM'))
 
 			// All version stuff is not in upgrade processing
 //            $installed_ver = get_option(SC_EDD_CM_Constants::PLUGIN_VERSION_OPTION_KEY);
-			//rsr todo       if($installed_ver != SC_EDD_CM_Constants::PLUGIN_VERSION)
+		//	if($installed_ver != SC_EDD_CM_Constants::PLUGIN_VERSION)
 			{
 				SC_EDD_CM_JSON_Entity_Base::init_table();
 
