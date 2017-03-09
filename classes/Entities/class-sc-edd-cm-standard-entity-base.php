@@ -233,7 +233,7 @@ if (!class_exists('SC_EDD_Standard_Entity_Base')) {
             if ($row != NULL) {
                 return self::get_instance_from_row($row, $class_name, $table_name);
             } else {
-                SC_EDD_CM_U::log("get_by_unique_field_and_type: row is null for $table_name, $field_name, $field_value");
+          //      SC_EDD_CM_U::log("get_by_unique_field_and_type: row is null for $table_name, $field_name, $field_value");
                 return null;
             }
         }

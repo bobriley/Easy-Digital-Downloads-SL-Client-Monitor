@@ -6,7 +6,7 @@
 		$active_tab = $_GET['tab'];
 	} else {
 
-		$active_tab = 'main';
+		$active_tab = 'licensing';
 	}
 ?>
 
@@ -31,16 +31,19 @@
     ?>
     
     <div id="sc-edd-cm-options" class="inside">
-        <h2 class="nav-tab-wrapper">  
-            <a href="?page=<?php echo SC_EDD_CM_Constants::PLUGIN_SLUG . '&tab=main' ?>" class="nav-tab <?php echo $active_tab == 'main' ? 'nav-tab-active' : ''; ?>"><?php SC_EDD_CM_U::_e('Main'); ?></a>  
+        <h2 class="nav-tab-wrapper">
+            <a href="?page=<?php echo SC_EDD_CM_Constants::PLUGIN_SLUG . '&tab=licensing' ?>" class="nav-tab <?php echo $active_tab == 'licensing' ? 'nav-tab-active' : ''; ?>"><?php SC_EDD_CM_U::_e('Licensing'); ?></a>
+            <a href="?page=<?php echo SC_EDD_CM_Constants::PLUGIN_SLUG . '&tab=main' ?>" class="nav-tab <?php echo $active_tab == 'main' ? 'nav-tab-active' : ''; ?>"><?php SC_EDD_CM_U::_e('Main'); ?></a>           
         </h2>
         <form id="sc-edd-cm-main-form" method="post" action="<?php echo admin_url('admin.php?page=' . SC_EDD_CM_Constants::$TOOLS_SUBMENU_SLUG . '&tab=' . $active_tab); ?>" >    
 			<input type="hidden" name="sc-edd-cm-form-action" id="sc-edd-cm-form-action" />
             <div id='tab-holder'>
                 <?php
                 if ($active_tab == 'main') {
-                    include 'page-tools-main-tab.php';                
-                }                                
+                    include 'page-tools-edd-clients-tab.php';                
+                } else if ($active_tab == 'licensing') {
+                    include 'page-tools-licensing-tab.php';
+                }
                 
                 ?>         
                 <!-- after redirect -->

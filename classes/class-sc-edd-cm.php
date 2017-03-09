@@ -67,10 +67,20 @@ if (!class_exists('SC_EDD_CM'))
 			
 			/* @var $global SC_EDD_CM_Global_Entity */
 			$global = SC_EDD_CM_Global_Entity::get_instance();
-			
+
 			if(($global != null) && ($global->collection_enabled))
 			{
-				$this->add_class_action('edd_get_version', 'edd_get_version_handler', 8);
+                if(($global->collection_start - time()) > 1200)
+                {
+                    // Auto turn off in 10 min
+                    $global->collection = false;
+                    $global->collection_start = -1;
+                    $global->save;
+                }
+                else
+                {
+                    $this->add_class_action('edd_get_version', 'edd_get_version_handler', 8);
+                }
 			}
 		}
 
@@ -81,7 +91,7 @@ if (!class_exists('SC_EDD_CM'))
 
 		function edd_get_version_handler($data)
 		{
-			SC_EDD_CM_U::log_object("check license handler", $data);
+		//	SC_EDD_CM_U::log_object("check license handler", $data);
 			//$item_id     = ! empty( $data['item_id'] )   ? absint( $data['item_id'] ) : -1;
 			$item_name   = ! empty( $data['item_name'] ) ? rawurldecode( $data['item_name'] ) : '';
 			$license_key     = urldecode( $data['license'] );
@@ -116,7 +126,7 @@ if (!class_exists('SC_EDD_CM'))
 				$client->first_hit_timestamp = time();
 			}
 			
-			SC_EDD_CM_U::log_object("saving client", $client);
+	//		SC_EDD_CM_U::log_object("saving client", $client);
 			
 			$client->save();
 		}
@@ -258,8 +268,8 @@ if (!class_exists('SC_EDD_CM'))
 
 			$perms = 'manage_options';
 
-			add_menu_page('Easy Digital Downloads SL Client Monitor', 'EDD Clients', $perms, SC_EDD_CM_Constants::PLUGIN_SLUG, array($this, 'display_tools_page'), SC_EDD_CM_U::$PLUGIN_URL . '/images/74-location-lighter.png');
-			$tools_page_hook_suffix = add_submenu_page(SC_EDD_CM_Constants::PLUGIN_SLUG, $this->__('Easy Digital Downloads SL Client Monitor Tools'), $this->__('Clients'), $perms, SC_EDD_CM_Constants::$TOOLS_SUBMENU_SLUG, array($this, 'display_tools_page'));
+			add_menu_page('Easy Digital Downloads SL Client Monitor', 'Snap Creek Tools', $perms, SC_EDD_CM_Constants::PLUGIN_SLUG, array($this, 'display_tools_page'), SC_EDD_CM_U::$PLUGIN_URL . '/images/74-location-lighter.png');
+			$tools_page_hook_suffix = add_submenu_page(SC_EDD_CM_Constants::PLUGIN_SLUG, $this->__('Easy Digital Downloads SL Client Monitor Tools'), $this->__('Tools'), $perms, SC_EDD_CM_Constants::$TOOLS_SUBMENU_SLUG, array($this, 'display_tools_page'));
 			$settings_page_hook_suffix = add_submenu_page(SC_EDD_CM_Constants::PLUGIN_SLUG, $this->__('Easy Digital Downloads SL Client Monitor Settings'), $this->__('Settings'), $perms, SC_EDD_CM_Constants::$SETTINGS_SUBMENU_SLUG, array($this, 'display_settings_page'));
 
 			add_action('admin_print_scripts-' . $tools_page_hook_suffix, array($this, 'enqueue_scripts'));

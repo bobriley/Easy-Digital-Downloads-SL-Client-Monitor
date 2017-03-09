@@ -33,6 +33,7 @@ if (!class_exists('SC_EDD_CM_Global_Entity'))
 		const TYPE = "SC_EDD_CM_Global_Entity";
 
 		public $collection_enabled = false;
+        public $collection_start = -1;
 
 		function __construct()
 		{

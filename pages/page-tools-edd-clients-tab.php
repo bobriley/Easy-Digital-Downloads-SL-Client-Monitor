@@ -1,8 +1,6 @@
 <?php
 require_once(SC_EDD_CM_U::$PLUGIN_DIRECTORY . '/classes/UI/class-sc-edd-cm-client-list.php');
 
-$export_nonce = wp_create_nonce('easy-pie-cspe-export-subscribers');
-
 ?>
 
 <div class="wrap">

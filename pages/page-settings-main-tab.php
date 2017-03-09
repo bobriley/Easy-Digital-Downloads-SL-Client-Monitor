@@ -21,6 +21,11 @@
 
             $error_string = $global->set_post_variables($_POST);
 
+            if($global->collection_enabled)
+            {
+                $global->collection_start = time();
+            }
+
             if ($error_string == "")
             {
                 $action_updated = $global->save();

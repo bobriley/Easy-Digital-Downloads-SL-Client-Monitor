@@ -239,7 +239,6 @@ if (!class_exists('SC_EDD_CM_Client_List_Control'))
 
 			return $columns;
 		}
-
 		public function get_hidden_columns()
 		{
 			return array('id');
@@ -248,8 +247,7 @@ if (!class_exists('SC_EDD_CM_Client_List_Control'))
 		public function get_sortable_columns()
 		{
 			return array('num_hits' => array('num_hits', false),
-				'last_hit_timestamp' => array('last_hit_timestamp', false),
-				'first_hit_timestamp' => array('first_hit_timestamp', false));
+				'expiration_date' => array('expiration_date', false));
 		}
 
 		public function get_bulk_actions()
@@ -277,36 +275,41 @@ if (!class_exists('SC_EDD_CM_Client_List_Control'))
 				
 				$days_diff++;
 
-				
-				$client->hits_per_day = $client->num_hits / $days_diff;
+				if($client->num_hits > 6)
+                {
+                    // Only include clients that have hit more than 6 times
+                    $client->hits_per_day = $client->num_hits / $days_diff;
 
-				$edd_swl = EDD_Software_Licensing::instance();
+                    $edd_swl = EDD_Software_Licensing::instance();
 
-				$args = array(
-					'item_id' => false,
-					'item_name' => $client->item_name,
-					'key' => $client->license_key,
-					'url' => $client->url,
-				);
-				
-				$result = $edd_swl->check_license($args);
+                    $args = array(
+                        'item_id' => false,
+                        'item_name' => $client->item_name,
+                        'key' => $client->license_key,
+                        'url' => $client->url,
+                    );
 
-				$license_id = $edd_swl->get_license_by_key($client->license_key);
+                    $result = $edd_swl->check_license($args);
 
-				$client->activations = $edd_swl->get_site_count($license_id);
+                    $license_id = $edd_swl->get_license_by_key($client->license_key);
 
-			//	$item_name = get_the_title($client->item_id);
+                    $client->activations = $edd_swl->get_site_count($license_id);
 
-				//RSR TODO: Need to display license status based on result
-				
-				$client->expiration_date = $edd_swl->get_license_expiration( $license_id );
-				
-				$payment_id  = get_post_meta( $license_id, '_edd_sl_payment_id', true );
-				$client->customer_id = edd_get_payment_customer_id( $payment_id );
+                //	$item_name = get_the_title($client->item_id);
 
-				$client->license_status = $result;
-				
-				$data[] = (array) $client;
+                    //RSR TODO: Need to display license status based on result
+
+                    $client->expiration_date = $edd_swl->get_license_expiration( $license_id );
+
+                    $payment_id  = get_post_meta( $license_id, '_edd_sl_payment_id', true );
+                    $client->customer_id = edd_get_payment_customer_id( $payment_id );
+
+                    $client->license_status = $result;
+                    if($result == 'expired')
+                    {
+                        $data[] = (array) $client;
+                    }
+                }
 			}
 
 			return $data;
