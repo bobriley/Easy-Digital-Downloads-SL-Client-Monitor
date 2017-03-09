@@ -29,8 +29,8 @@ if (!class_exists('SC_EDD_CM_Constants'))
 	 */
 	class SC_EDD_CM_Constants
 	{
-		const PLUGIN_SLUG = 'sc-edd-cm';
-		const PLUGIN_VERSION = "0.0.1"; // RSR Version
+		const PLUGIN_SLUG = 'sc-tools';
+		const PLUGIN_VERSION = "0.0.2"; // RSR Version
 		const PLUGIN_VERSION_OPTION_KEY = "sc_edd_cm_version"; // RSR Version
 
 		/* Pseudo constants */

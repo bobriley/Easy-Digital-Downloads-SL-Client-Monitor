@@ -1,9 +1,9 @@
 <?php
 /*
-  Plugin Name: Easy Digital Downloads - SL Client Monitor
+  Plugin Name: Snap Creek Tools
   Plugin URI: http://snapcreek.com
-  Description: Monitors and blocks Easy Digital Downloads Software Licensing clients
-  Version: 0.0.1
+  Description: Snap Creek Tools
+  Version: 0.0.2
   Author: Snap Creek LLC
   Author URI: https://snapcreek.com
   Text Domain: snapcreek

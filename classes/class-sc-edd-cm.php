@@ -268,9 +268,9 @@ if (!class_exists('SC_EDD_CM'))
 
 			$perms = 'manage_options';
 
-			add_menu_page('Easy Digital Downloads SL Client Monitor', 'Snap Creek Tools', $perms, SC_EDD_CM_Constants::PLUGIN_SLUG, array($this, 'display_tools_page'), SC_EDD_CM_U::$PLUGIN_URL . '/images/74-location-lighter.png');
-			$tools_page_hook_suffix = add_submenu_page(SC_EDD_CM_Constants::PLUGIN_SLUG, $this->__('Easy Digital Downloads SL Client Monitor Tools'), $this->__('Tools'), $perms, SC_EDD_CM_Constants::$TOOLS_SUBMENU_SLUG, array($this, 'display_tools_page'));
-			$settings_page_hook_suffix = add_submenu_page(SC_EDD_CM_Constants::PLUGIN_SLUG, $this->__('Easy Digital Downloads SL Client Monitor Settings'), $this->__('Settings'), $perms, SC_EDD_CM_Constants::$SETTINGS_SUBMENU_SLUG, array($this, 'display_settings_page'));
+			add_menu_page('Snap Creek Tools', 'Snap Creek Tools', $perms, SC_EDD_CM_Constants::PLUGIN_SLUG, array($this, 'display_tools_page'), SC_EDD_CM_U::$PLUGIN_URL . '/images/74-location-lighter.png');
+			$tools_page_hook_suffix = add_submenu_page(SC_EDD_CM_Constants::PLUGIN_SLUG, $this->__('Snap Creek Tools'), $this->__('Tools'), $perms, SC_EDD_CM_Constants::$TOOLS_SUBMENU_SLUG, array($this, 'display_tools_page'));
+			$settings_page_hook_suffix = add_submenu_page(SC_EDD_CM_Constants::PLUGIN_SLUG, $this->__('Snap Creek Tools Settings'), $this->__('Settings'), $perms, SC_EDD_CM_Constants::$SETTINGS_SUBMENU_SLUG, array($this, 'display_settings_page'));
 
 			add_action('admin_print_scripts-' . $tools_page_hook_suffix, array($this, 'enqueue_scripts'));
 			add_action('admin_print_scripts-' . $settings_page_hook_suffix, array($this, 'enqueue_scripts'));

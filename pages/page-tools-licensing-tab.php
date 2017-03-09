@@ -6,6 +6,7 @@ require_once(SC_EDD_CM_U::$PLUGIN_DIRECTORY.'/classes/Utilities/class-sc-edd-cry
 
     <?php screen_icon(SC_EDD_CM_Constants::PLUGIN_SLUG); ?>
     <div id="sc-edd-cm-options" class="inside">
+        <h2><?php echo SC_EDD_CM_U::__('OVR Key Generator'); ?></h2>
         <?php
         $nonce_action = 'sc-edd-cm-license-operation';
         $nonce        = wp_create_nonce($nonce_action);
@@ -15,35 +16,35 @@ require_once(SC_EDD_CM_U::$PLUGIN_DIRECTORY.'/classes/Utilities/class-sc-edd-cry
                 case 'generate-override-file':
 
                     $real_license_key = $_REQUEST['license_key'];
-                    
                     $edd_swl = EDD_Software_Licensing::instance();
-
                     $license_id = $edd_swl->get_license_by_key($real_license_key);
 
-                    $numsites = $edd_swl->get_license_limit($license_id);
 
-                    echo "LICENSE:$real_license_key<br/>";
-                    echo "COUNT:$real_license_key<br/>";
 
-                   // if($numsites == 0)
+                    if($license_id === false)
                     {
+                        echo "<span style='font-size:20px'>Invalid key: {$real_license_key}!</span><br/>";
+                    }
+                    else
+                    {
+						echo "KEY:{$real_license_key}<br/><br/>";
+						$numsites = $edd_swl->license_limit($license_id);
+                        echo "SITE COUNT:{$numsites}<br/><br/>";
+
                         $unscrambledOvrKey = 'SCOVRK' . $real_license_key . '_' . $numsites;
                         $scrambledOvrKey = SC_EDD_CM_Crypt::scramble($unscrambledOvrKey);
 
-                        echo 'UNSCRAMBLED OVR KEY:' . SC_EDD_CM_Crypt::unscramble($scrambledOvrKey) . '</br>';
-                        echo "<textarea readonly style='width:400px; font-size:24px;' id='ovr_key'>{$scrambledOvrKey}</textarea>";
+                        echo 'UNSCRAMBLED OVR KEY:' . SC_EDD_CM_Crypt::unscramble($scrambledOvrKey) . '<br/><br/>';
+                        echo "<input readonly style='margin-right:20px; width:600px; font-size:20px;' id='ovr_key' value ='${scrambledOvrKey}'/><br/>";
                         echo "<button type='button' onclick=sc.edd.cm.tools.copyOvrKey();return false;'>Copy</button>";
+                        echo "<br/><br/>";
                         ?>
                             <script type="text/javascript">
                                 copyOvrKey = true;
                             </script>
                         <?php
                     }
-                    //else
-                    //{
-//                        echo 'Number of sites = 0!';
-//                    }
-                    
+
                     break;
             }
         }
@@ -56,12 +57,11 @@ require_once(SC_EDD_CM_U::$PLUGIN_DIRECTORY.'/classes/Utilities/class-sc-edd-cry
         <div class="wrap">
 
         <?php screen_icon(SC_EDD_CM_Constants::PLUGIN_SLUG); ?>
-            <h2><?php echo SC_EDD_CM_U::__('OVR Key Generator'); ?></h2>
-            
+
             <div id="sc-edd-cm-options" class="inside">
 
                 <div class="wrap">
-                    <span>License:</span> <input type="text" name="license_key" />
+                    <span>License:</span> <input style="width:400px"; type="text" name="license_key" />
                     <button onclick="sc.edd.cm.tools.generateOverrideFile()">Generate</button>
                 </div>
             </div>
