@@ -213,8 +213,8 @@ if (!class_exists('SC_EDD_CM'))
 
 			$styleRoot = plugins_url() . "/" . SC_EDD_CM_Constants::PLUGIN_SLUG . "/styles";
 
-			wp_register_style('easy-pie-cspe-common-admin-styles.css', $styleRoot . '/easy-pie-cspe-common-admin-styles.css', array(), SC_EDD_CM_Constants::PLUGIN_VERSION);
-			wp_enqueue_style('easy-pie-cspe-common-admin-styles.css');
+			//wp_register_style('easy-pie-cspe-common-admin-styles.css', $styleRoot . '/easy-pie-cspe-common-admin-styles.css', array(), SC_EDD_CM_Constants::PLUGIN_VERSION);
+			//wp_enqueue_style('easy-pie-cspe-common-admin-styles.css');
 		}
 
 		public function init_localization()
